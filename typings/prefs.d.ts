@@ -7,8 +7,8 @@
 declare namespace _ZoteroTypes {
   interface Prefs {
     PluginPrefsMap: {
-      "enable": boolean;
-      "input": string;
+      "nutstore-sso-token": string;
+      "nutstore-webdav-force-set": boolean;
     };
   }
 }

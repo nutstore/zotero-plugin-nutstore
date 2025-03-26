@@ -1,5 +1,11 @@
-pref-title = 插件模板设置示例
-pref-enable =
-    .label = 开启
-pref-input = 输入
-pref-help = { $name } Build { $version } { $time }
+pref-title = 坚果云
+pref-sso-title = 账户信息
+pref-sso-login-button =
+    .label = 点击登录
+pref-sso-logout-button =
+    .label = 退出账户
+pref-sso-username-label = 用户名：{ $username }
+pref-force-fix-nutstore-webdav-button =
+    .label = 强制修复
+pref-current-nutstore-webdav-success = 当前 webdav 配置正确
+pref-current-nutstore-webdav-error = 当前 webdav 配置错误

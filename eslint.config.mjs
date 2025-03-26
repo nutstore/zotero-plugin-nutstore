@@ -1,46 +1,49 @@
 // @ts-check Let TS check this config file
 
-import eslint from "@eslint/js";
-import tseslint from "typescript-eslint";
+import nshq from '@nshq/eslint-config'
 
-export default tseslint.config(
+export default nshq(
   {
-    ignores: ["build/**", ".scaffold/**", "node_modules/**", "scripts/"],
+    markdown: false,
   },
   {
-    extends: [eslint.configs.recommended, ...tseslint.configs.recommended],
+    ignores: ['build/**', '.scaffold/**', 'node_modules/**', 'scripts/', 'addon/*.js', 'addon/content/lib/sso/index.js'],
+  },
+  {
     rules: {
-      "no-restricted-globals": [
-        "error",
-        { message: "Use `Zotero.getMainWindow()` instead.", name: "window" },
+      'no-restricted-globals': [
+        'error',
+        { message: 'Use `Zotero.getMainWindow()` instead.', name: 'window' },
         {
-          message: "Use `Zotero.getMainWindow().document` instead.",
-          name: "document",
+          message: 'Use `Zotero.getMainWindow().document` instead.',
+          name: 'document',
         },
         {
-          message: "Use `Zotero.getActiveZoteroPane()` instead.",
-          name: "ZoteroPane",
+          message: 'Use `Zotero.getActiveZoteroPane()` instead.',
+          name: 'ZoteroPane',
         },
-        "Zotero_Tabs",
+        'Zotero_Tabs',
       ],
 
-      "@typescript-eslint/ban-ts-comment": [
-        "warn",
+      '@typescript-eslint/ban-ts-comment': [
+        'warn',
         {
-          "ts-expect-error": "allow-with-description",
-          "ts-ignore": "allow-with-description",
-          "ts-nocheck": "allow-with-description",
-          "ts-check": "allow-with-description",
+          'ts-expect-error': 'allow-with-description',
+          'ts-ignore': 'allow-with-description',
+          'ts-nocheck': 'allow-with-description',
+          'ts-check': 'allow-with-description',
         },
       ],
-      "@typescript-eslint/no-unused-vars": "off",
-      "@typescript-eslint/no-explicit-any": [
-        "off",
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-explicit-any': [
+        'off',
         {
           ignoreRestArgs: true,
         },
       ],
-      "@typescript-eslint/no-non-null-assertion": "off",
+      '@typescript-eslint/no-non-null-assertion': 'off',
+      'no-console': 'error',
+      'eqeqeq': ['error', 'always', { null: 'ignore' }],
     },
   },
-);
+)

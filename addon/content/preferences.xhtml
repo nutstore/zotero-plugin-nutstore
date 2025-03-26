@@ -1,33 +1,38 @@
-<linkset>
+<head>
   <html:link rel="localization" href="__addonRef__-preferences.ftl" />
-</linkset>
-<groupbox
-  onload="Zotero.__addonInstance__.hooks.onPrefsEvent('load', { window });"
->
-  <label><html:h2 data-l10n-id="pref-title"></html:h2></label>
-  <checkbox
-    id="zotero-prefpane-__addonRef__-enable"
-    preference="enable"
-    data-l10n-id="pref-enable"
-  />
-  <hbox>
-    <html:label
-      for="zotero-prefpane-__addonRef__-input"
-      data-l10n-id="pref-input"
-    ></html:label>
-    <html:input
-      type="text"
-      id="zotero-prefpane-__addonRef__-input"
-      preference="input"
-    ></html:input>
-  </hbox>
-  <hbox class="virtualized-table-container" flex="1" height="300px">
-    <html:div id="__addonRef__-table-container" />
-  </hbox>
+  <html:link rel="stylesheet" type="text/css" href="chrome://__addonRef__/content/css/output.css" />
+</head>
+
+<groupbox onload="Zotero.__addonInstance__.hooks.onPrefsEvent('load', { window });">
+  <groupbox>
+    <label>
+      <html:h2 data-l10n-id="pref-sso-title"></html:h2>
+    </label>
+    <hbox id="__addonRef__-sso-button-container" align="center">
+      <button id="__addonRef__-sso-login" data-l10n-id="pref-sso-login-button"></button>
+    </hbox>
+    <vbox id="__addonRef__-authorized-container">
+      <hbox class="flex gap-1 mt-1">
+        <label id="__addonRef__-sso-username" data-l10n-id="pref-sso-username-label"
+          data-l10n-args="{ 'username': 'username' }"></label>
+        <button id="__addonRef__-sso-logout" data-l10n-id="pref-sso-logout-button"></button>
+      </hbox>
+      <hbox class="flex gap-1 mt-1 items-center">
+        <hbox class="flex items-center" id="__addonRef__-current-nutstore-webdav-success-container">
+          <label id="__addonRef__-current-nutstore-webdav-success"
+            data-l10n-id="pref-current-nutstore-webdav-success"></label>
+          <span class="w-5 h-5 icon-[lucide--check] text-green-500"></span>
+        </hbox>
+        <hbox class="flex items-center" id="__addonRef__-current-nutstore-webdav-error-container">
+          <label id="__addonRef__-current-nutstore-webdav-error"
+            data-l10n-id="pref-current-nutstore-webdav-error"></label>
+          <span class="w-5 h-5 icon-[lucide--x] text-red-500"></span>
+        </hbox>
+
+        <button id="__addonRef__-force-fix-nutstore-webdav-button"
+          data-l10n-id="pref-force-fix-nutstore-webdav-button"></button>
+
+      </hbox>
+    </vbox>
+  </groupbox>
 </groupbox>
-<vbox>
-  <html:label
-    data-l10n-id="pref-help"
-    data-l10n-args='{"time": "__buildTime__","name": "__addonName__","version":"__buildVersion__"}'
-  ></html:label>
-</vbox>

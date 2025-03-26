@@ -1,27 +1,30 @@
 {
-  "name": "zotero-plugin-template",
+  "name": "zotero-plugin-nutstore-sso",
   "type": "module",
-  "version": "3.0.4",
-  "description": "Zotero Plugin Template",
+  "version": "1.0.0",
+  "packageManager": "pnpm@10.6.5",
+  "description": "Nutstore sso plugin for Zotero",
   "config": {
-    "addonName": "Zotero Plugin Template",
-    "addonID": "addontemplate@euclpts.com",
-    "addonRef": "addontemplate",
-    "addonInstance": "AddonTemplate",
-    "prefsPrefix": "extensions.zotero.addontemplate"
+    "addonName": "Nutstore SSO",
+    "addonID": "shenhaoliang@cn.nutstore.net",
+    "addonRef": "zotero-plugin-nutstore-sso",
+    "addonInstance": "ZoteroNutstoreSSO",
+    "prefsPrefix": "extensions.zotero.zotero-plugin-nutstore-sso"
   },
+  "author": "nutstore-dev",
+  "license": "AGPL-3.0-or-later",
+  "homepage": "https://github.com/windingwind/zotero-plugin-template#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/windingwind/zotero-plugin-template.git"
   },
-  "author": "windingwind",
   "bugs": {
     "url": "https://github.com/windingwind/zotero-plugin-template/issues"
   },
-  "homepage": "https://github.com/windingwind/zotero-plugin-template#readme",
-  "license": "AGPL-3.0-or-later",
   "scripts": {
-    "start": "zotero-plugin serve",
+    "dev": "pnpm run dev:zotero & pnpm run dev:tw",
+    "dev:zotero": "zotero-plugin serve",
+    "dev:tw": "tailwindcss -i ./src/input.css -o ./addon/content/css/output.css --watch",
     "build": "zotero-plugin build && tsc --noEmit",
     "lint:check": "prettier --check . && eslint .",
     "lint:fix": "prettier --write . && eslint . --fix",
@@ -30,13 +33,19 @@
     "update-deps": "npm update --save"
   },
   "dependencies": {
+    "bluebird": "^3.7.2",
     "zotero-plugin-toolkit": "^4.1.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
+    "@iconify/json": "^2.2.321",
+    "@iconify/tailwind4": "^1.0.6",
+    "@nshq/eslint-config": "^4.0.1",
+    "@tailwindcss/cli": "^4.0.17",
     "@types/node": "^22.13.10",
     "eslint": "^9.22.0",
     "prettier": "^3.5.3",
+    "tailwindcss": "^4.0.17",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.26.1",
     "zotero-plugin-scaffold": "^0.3.5",
@@ -55,6 +64,15 @@
           "htmlWhitespaceSensitivity": "css"
         }
       }
+    ]
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@swc/core",
+      "core-js",
+      "es5-ext",
+      "esbuild"
     ]
   }
 }

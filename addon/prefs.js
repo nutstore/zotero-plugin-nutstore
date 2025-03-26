@@ -1,3 +1,3 @@
 /* eslint-disable no-undef */
-pref("enable", true);
-pref("input", "This is input");
+pref('nutstore-sso-token', '')
+pref('nutstore-webdav-force-set', true)
