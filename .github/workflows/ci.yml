@@ -23,15 +23,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+  
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
 
       - name: Install deps
         run: |
-          npm install
+          pnpm install
 
       - name: Run Lint
         run: |
-          npm run lint:check
+          pnpm run lint:check
 
   build:
     runs-on: ubuntu-latest
@@ -47,15 +49,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
 
       - name: Install deps
         run: |
-          npm install
+          pnpm install
 
       - name: Run Build
         run: |
-          npm run build
+          pnpm run build
 
       - name: Upload build result
         uses: actions/upload-artifact@v4

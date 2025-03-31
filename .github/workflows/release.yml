@@ -26,16 +26,19 @@ jobs:
         with:
           node-version: 20
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Install deps
-        run: npm install
+        run: pnpm install
 
       - name: Build
         run: |
-          npm run build
+          pnpm run build
 
       - name: Release to GitHub
         run: |
-          npm run release
+          pnpm run release
           sleep 1s
 
       - name: Notify release
