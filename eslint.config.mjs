@@ -1,8 +1,8 @@
 // @ts-check Let TS check this config file
 
-import nshq from '@nshq/eslint-config'
+import antfu from '@antfu/eslint-config'
 
-export default nshq(
+export default antfu(
   {
     markdown: false,
   },
