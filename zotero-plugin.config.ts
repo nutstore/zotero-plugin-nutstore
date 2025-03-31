@@ -1,3 +1,4 @@
+import process from 'node:process'
 import { defineConfig } from 'zotero-plugin-scaffold'
 import pkg from './package.json'
 
