@@ -11,15 +11,15 @@
     "addonInstance": "ZoteroNutstoreSSO",
     "prefsPrefix": "extensions.zotero.zotero-plugin-nutstore-sso"
   },
-  "author": "nutstore-dev",
+  "author": "nutstore",
   "license": "AGPL-3.0-or-later",
-  "homepage": "https://github.com/windingwind/zotero-plugin-template#readme",
+  "homepage": "https://github.com/nutstore/zotero-plugin-nutstore-sso#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/windingwind/zotero-plugin-template.git"
+    "url": "git+https://github.com/nutstore/zotero-plugin-nutstore-sso.git"
   },
   "bugs": {
-    "url": "https://github.com/windingwind/zotero-plugin-template/issues"
+    "url": "https://github.com/nutstore/zotero-plugin-nutstore-sso/issues"
   },
   "scripts": {
     "dev": "pnpm run dev:zotero & pnpm run dev:tw",

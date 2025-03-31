@@ -16,9 +16,9 @@ This is a Zotero plugin for Nutstore SSO.
 
 - Download the plugin (.xpi file) from below.
 
-  - [Latest Version: 2.4.0](https://github.com/xx/yy/releases/download/v2.4.0/better-notes-for-zotero.xpi)
-  - [Latest Stable](https://github.com/xx/yy/releases/latest)
-  - [All Releases](https://github.com/xx/yy/releases)
+  - [Latest Version: 1.0.0](https://github.com/nutstore/zotero-plugin-nutstore-sso/releases/download/v1.0.0/zotero-plugin-nutstore-sso.xpi)
+  - [Latest Stable](https://github.com/nutstore/zotero-plugin-nutstore-sso/releases/latest)
+  - [All Releases](https://github.com/nutstore/zotero-plugin-nutstore-sso/releases)
 
   _Note_: If you're using Firefox as your browser, right-click the `.xpi` and select "Save As.."
 
