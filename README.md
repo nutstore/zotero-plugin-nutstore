@@ -16,7 +16,7 @@ This is a Zotero plugin for Nutstore SSO.
 
 - Download the plugin (.xpi file) from below.
 
-  - [Latest Version: 1.0.0](https://github.com/nutstore/zotero-plugin-nutstore-sso/releases/download/v1.0.0/zotero-plugin-nutstore-sso.xpi)
+  - [Latest Version: 1.0.1](https://github.com/nutstore/zotero-plugin-nutstore-sso/releases/download/v1.0.1/zotero-plugin-nutstore-sso.xpi)
   - [Latest Stable](https://github.com/nutstore/zotero-plugin-nutstore-sso/releases/latest)
   - [All Releases](https://github.com/nutstore/zotero-plugin-nutstore-sso/releases)
 
@@ -100,4 +100,4 @@ This section shows the directory structure of a template.
 
 Use this code under AGPL. No warranties are provided. Keep the laws of your locality in mind!
 
-If you want to change the license, please contact me at <>
+If you want to change the license, please contact us.
