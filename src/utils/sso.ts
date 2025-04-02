@@ -1,4 +1,4 @@
-import { config } from '../../package.json'
+import { once } from './F'
 
 export interface OAuthResponse {
   username: string
@@ -6,17 +6,21 @@ export interface OAuthResponse {
   access_token: string
 }
 
-export const getSSOMethod = Zotero.lazy(() => {
-  const sso = ChromeUtils.importESModule(`chrome://${config.addonRef}/content/lib/sso/index.js`) as NutstoreSSO
+const importSSO = once(async () => {
+  return import('@nutstore/sso-wasm')
+})
 
+export async function getSSOMethod() {
+  const sso = await importSSO()
+  ztoolkit.log('sso', sso)
   function launchOAuthUrl() {
-    const url = (addon.data.env === 'development' ? (sso as any)._dont_use_in_prod_createOAuthUrl : sso.createOAuthUrl)({ app: 'zotero' })
+    const url = (addon.data.env === 'development' ? sso._dont_use_in_prod_createOAuthUrl : sso.createOAuthUrl)({ app: 'zotero' })
     Zotero.launchURL(url)
   }
 
   function decryptToken(token: string) {
     try {
-      const result = (addon.data.env === 'development' ? (sso as any)._dont_use_in_prod_decrypt : sso.decrypt)({ app: 'zotero', s: token })
+      const result = (addon.data.env === 'development' ? sso._dont_use_in_prod_decrypt : sso.decrypt)({ app: 'zotero', s: token })
       return JSON.parse(result) as OAuthResponse
     }
     catch (e) {
@@ -28,7 +32,4 @@ export const getSSOMethod = Zotero.lazy(() => {
     launchOAuthUrl,
     decryptToken,
   }
-}) as () => {
-  launchOAuthUrl: () => void
-  decryptToken: (token: string) => OAuthResponse | null
 }

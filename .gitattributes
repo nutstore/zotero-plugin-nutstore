@@ -1,1 +1,4 @@
 * text=auto eol=lf
+
+# 忽略 output.css 在 GitHub 差异比较中的显示
+addon/content/css/output.css -diff linguist-generated=true

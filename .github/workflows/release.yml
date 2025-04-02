@@ -13,6 +13,10 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
     env:
       GITHUB_TOKEN: ${{ secrets.GitHub_TOKEN }}
     steps:
@@ -30,6 +34,8 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Install deps
+        env:
+          NUTSTORE_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm install
 
       - name: Build

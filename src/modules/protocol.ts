@@ -24,8 +24,8 @@ export function registerNutstoreSSOProtocol() {
   registerCustomProtocolPath('nutstore-sync', new SSOProtocol())
 }
 
-export function onNutstoreSSOProtocolCall(token: string) {
-  const { decryptToken } = getSSOMethod()
+async function onNutstoreSSOProtocolCall(token: string) {
+  const { decryptToken } = await getSSOMethod()
   const result = decryptToken(token)
 
   if (result) {
