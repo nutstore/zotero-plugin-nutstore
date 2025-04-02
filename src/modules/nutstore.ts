@@ -4,16 +4,16 @@ import { clearStoragePasswordInputValue, getNutstoreWebdavUrl, isNutstoreWebdav,
 import { getPref, getPrefWin, setPref } from '../utils/prefs'
 import { getSSOMethod } from '../utils/sso'
 
-export { onNutstoreSSOProtocolCall, registerNutstoreSSOProtocol } from './protocol'
+export { registerNutstoreSSOProtocol } from './protocol'
 
-export function updateNutstorePerfs() {
+export async function updateNutstorePerfs() {
   const prefWin = getPrefWin()
   if (!prefWin)
     return
   const nutstoreToken = getPref('nutstore-sso-token')
 
   if (nutstoreToken) {
-    const oauthInfo = getSSOMethod().decryptToken(nutstoreToken)
+    const oauthInfo = (await getSSOMethod()).decryptToken(nutstoreToken)
 
     const usernameLabel = getElementById(`${config.addonRef}-sso-username`, prefWin)
 
@@ -46,7 +46,7 @@ async function updateForceButtonEnabled() {
     return
   }
 
-  const oauthInfo = getSSOMethod().decryptToken(token)
+  const oauthInfo = (await getSSOMethod()).decryptToken(token)
 
   if (!oauthInfo) {
     toggleForceFixNutstoreWebdavButton('enabled')
@@ -86,7 +86,7 @@ function toggleForceFixNutstoreWebdavButton(status: 'enabled' | 'disabled') {
 
 export async function setNutstoreWebdavPerfs() {
   const nutstoreToken = getPref('nutstore-sso-token')
-  const oauthInfo = getSSOMethod().decryptToken(nutstoreToken)
+  const oauthInfo = (await getSSOMethod()).decryptToken(nutstoreToken)
   if (!oauthInfo)
     return
   Zotero.Prefs.set('sync.storage.enabled', true)
@@ -101,7 +101,7 @@ export async function setNutstoreWebdavPerfs() {
 
 export async function clearNutstoreWebdavPerfs() {
   const nutstoreToken = getPref('nutstore-sso-token')
-  const oauthInfo = getSSOMethod().decryptToken(nutstoreToken)
+  const oauthInfo = (await getSSOMethod()).decryptToken(nutstoreToken)
   if (!oauthInfo)
     return
   const forceSet = getPref('nutstore-webdav-force-set')
@@ -122,7 +122,7 @@ export async function forceSetNutstoreWebdavPerfs() {
   const nutstoreToken = getPref('nutstore-sso-token')
   if (!nutstoreToken)
     return
-  const oauthInfo = getSSOMethod().decryptToken(nutstoreToken)
+  const oauthInfo = (await getSSOMethod()).decryptToken(nutstoreToken)
   if (!oauthInfo)
     return
 

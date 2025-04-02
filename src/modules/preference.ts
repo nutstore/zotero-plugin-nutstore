@@ -62,9 +62,9 @@ function bindPrefEvents() {
 
   window.document.querySelector(
     `#${config.addonRef}-sso-login`,
-  )?.addEventListener('command', () => {
-    const result = getSSOMethod()
-    result.launchOAuthUrl()
+  )?.addEventListener('command', async () => {
+    const { launchOAuthUrl } = await getSSOMethod()
+    launchOAuthUrl()
   })
 
   window.document.querySelector(

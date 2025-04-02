@@ -2,11 +2,11 @@
   "name": "zotero-plugin-nutstore-sso",
   "type": "module",
   "version": "1.0.1",
-  "packageManager": "pnpm@10.6.5",
+  "packageManager": "pnpm@10.7.0",
   "description": "Nutstore sso plugin for Zotero",
   "config": {
     "addonName": "Nutstore SSO",
-    "addonID": "shenhaoliang@cn.nutstore.net",
+    "addonID": "register02@cn.nutstore.net",
     "addonRef": "zotero-plugin-nutstore-sso",
     "addonInstance": "ZoteroNutstoreSSO",
     "prefsPrefix": "extensions.zotero.zotero-plugin-nutstore-sso"
@@ -33,6 +33,7 @@
     "update-deps": "npm update --save"
   },
   "dependencies": {
+    "@nutstore/sso-wasm": "^0.0.2",
     "bluebird": "^3.7.2",
     "zotero-plugin-toolkit": "^4.1.2"
   },
