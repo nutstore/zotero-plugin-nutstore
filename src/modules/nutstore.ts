@@ -17,18 +17,19 @@ export async function updateNutstorePerfs() {
 
     const usernameLabel = getElementById(`${config.addonRef}-sso-username`, prefWin)
 
-    hideElement(`${config.addonRef}-sso-button-container`, prefWin)
-    showElement(`${config.addonRef}-authorized-container`, prefWin)
-
     if (!oauthInfo || !usernameLabel)
       return
-    usernameLabel.dataset.l10nArgs = JSON.stringify({ username: oauthInfo.username })
 
+    usernameLabel.dataset.l10nArgs = JSON.stringify({ username: oauthInfo.username })
+    hideElement(`${config.addonRef}-sso-button-container`, prefWin)
+    showElement(`${config.addonRef}-authorized-container`, prefWin)
     updateForceButtonEnabled()
   }
   else {
     showElement(`${config.addonRef}-sso-button-container`, prefWin)
     hideElement(`${config.addonRef}-authorized-container`, prefWin)
+
+    updateForceButtonEnabled()
   }
 }
 
@@ -72,7 +73,6 @@ function toggleForceFixNutstoreWebdavButton(status: 'enabled' | 'disabled') {
   if (!forceButton)
     return;
   (forceButton as HTMLButtonElement).setAttribute('disabled', status === 'disabled' ? 'true' : 'false')
-  ztoolkit.log(prefWin.document.getElementById(`${config.addonRef}-current-nutstore-webdav-error-container`))
 
   if (status === 'disabled') {
     hideElement(`${config.addonRef}-current-nutstore-webdav-error-container`, prefWin)

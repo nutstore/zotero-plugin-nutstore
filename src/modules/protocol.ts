@@ -45,5 +45,8 @@ async function onNutstoreSSOProtocolCall(token: string) {
       setNutstoreWebdavPerfs()
       setPref('nutstore-webdav-force-set', true)
     }
+    else {
+      updateNutstorePerfs()
+    }
   }
 }
