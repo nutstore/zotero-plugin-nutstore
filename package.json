@@ -1,7 +1,7 @@
 {
   "name": "zotero-plugin-nutstore-sso",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "packageManager": "pnpm@10.7.0",
   "description": "Nutstore sso plugin for Zotero",
   "config": {
