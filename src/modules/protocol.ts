@@ -1,9 +1,10 @@
 import type { ProtocolExtension } from '../utils/protocol'
 import { getString } from '../utils/locale'
+import { reInitZoteroSync } from '../utils/nutstore'
 import { setPref } from '../utils/prefs'
 import { registerCustomProtocolPath } from '../utils/protocol'
 import { getSSOMethod } from '../utils/sso'
-import { setNutstoreWebdavPerfs, updateNutstorePerfs } from './nutstore'
+import { forceSetNutstoreWebdavPerfs, updateNutstorePerfs } from './nutstore'
 
 class SSOProtocol implements ProtocolExtension {
   noContent = true
@@ -42,8 +43,7 @@ async function onNutstoreSSOProtocolCall(token: string) {
     })
 
     if (confirm === 0) {
-      setNutstoreWebdavPerfs()
-      setPref('nutstore-webdav-force-set', true)
+      forceSetNutstoreWebdavPerfs()
     }
     else {
       updateNutstorePerfs()

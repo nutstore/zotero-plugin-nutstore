@@ -87,9 +87,6 @@
   .gap-1 {
     gap: calc(var(--spacing) * 1);
   }
-  .mask-repeat {
-    mask-repeat: repeat;
-  }
   .text-green-500 {
     color: var(--color-green-500);
   }

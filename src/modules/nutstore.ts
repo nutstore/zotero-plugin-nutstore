@@ -84,21 +84,6 @@ function toggleForceFixNutstoreWebdavButton(status: 'enabled' | 'disabled') {
   }
 }
 
-export async function setNutstoreWebdavPerfs() {
-  const nutstoreToken = getPref('nutstore-sso-token')
-  const oauthInfo = (await getSSOMethod()).decryptToken(nutstoreToken)
-  if (!oauthInfo)
-    return
-  Zotero.Prefs.set('sync.storage.enabled', true)
-  Zotero.Prefs.set('sync.storage.protocol', 'webdav')
-  Zotero.Prefs.set('sync.storage.scheme', 'https')
-  Zotero.Prefs.set('sync.storage.username', oauthInfo.username)
-  Zotero.Prefs.set('sync.storage.url', getNutstoreWebdavUrl())
-  await Zotero.Sync.Runner.getStorageController('webdav').setPassword(oauthInfo.access_token)
-
-  reInitZoteroSync()
-}
-
 export async function clearNutstoreWebdavPerfs() {
   const nutstoreToken = getPref('nutstore-sso-token')
   const oauthInfo = (await getSSOMethod()).decryptToken(nutstoreToken)
@@ -135,6 +120,7 @@ export async function forceSetNutstoreWebdavPerfs() {
   reInitZoteroSync()
 
   setPref('nutstore-webdav-force-set', true)
+  updateNutstorePerfs()
 }
 
 export function syncPerfObserver() {
