@@ -56,9 +56,9 @@ declare namespace Zotero {
 
           get username(): string
 
-          getPassword(): Promise<string>
+          get password(): string
 
-          setPassword(password: string): Promise<void>
+          set password(password: string): void
 
           get rootURI(): nsIURI | never
           get parentURI(): nsIURI | never
