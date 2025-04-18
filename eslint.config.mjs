@@ -7,7 +7,7 @@ export default antfu(
     markdown: false,
   },
   {
-    ignores: ['build/**', '.scaffold/**', 'node_modules/**', 'scripts/', 'addon/*.js', 'addon/content/lib/sso/index.js'],
+    ignores: ['build/**', '.scaffold/**', 'node_modules/**', 'scripts/', 'addon/*.js'],
   },
   {
     rules: {
