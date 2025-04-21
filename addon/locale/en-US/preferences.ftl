@@ -10,3 +10,7 @@ pref-force-fix-nutstore-webdav-button =
 pref-current-nutstore-webdav-success = Current webdav configuration is correct
 pref-current-nutstore-webdav-error = Current webdav configuration is incorrect
 
+pref-enhanced-webdav-title = Enhanced WebDAV
+pref-enhanced-webdav-checkbox =
+    .label = Enable Enhanced WebDAV
+pref-enhanced-webdav-description = This feature requires the Nutstore client to be installed and logged in.

@@ -9,6 +9,7 @@ declare namespace _ZoteroTypes {
     PluginPrefsMap: {
       "nutstore-sso-token": string;
       "nutstore-webdav-force-set": boolean;
+      "nutstore-enhanced-webdav": boolean;
     };
   }
 }

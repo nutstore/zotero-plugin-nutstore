@@ -1,6 +1,9 @@
 <head>
-  <html:link rel="localization" href="__addonRef__-preferences.ftl" />
-  <html:link rel="stylesheet" type="text/css" href="chrome://__addonRef__/content/css/output.css" />
+  <html:link rel="localization"
+             href="__addonRef__-preferences.ftl" />
+  <html:link rel="stylesheet"
+             type="text/css"
+             href="chrome://__addonRef__/content/css/output.css" />
 </head>
 
 <groupbox onload="Zotero.__addonInstance__.hooks.onPrefsEvent('load', { window });">
@@ -8,31 +11,58 @@
     <label>
       <html:h2 data-l10n-id="pref-sso-title"></html:h2>
     </label>
-    <hbox id="__addonRef__-sso-button-container" align="center">
-      <button id="__addonRef__-sso-login" data-l10n-id="pref-sso-login-button"></button>
+    <hbox id="__addonRef__-sso-button-container"
+          align="center">
+      <button id="__addonRef__-sso-login"
+              data-l10n-id="pref-sso-login-button"></button>
     </hbox>
     <vbox id="__addonRef__-authorized-container">
       <hbox class="flex gap-1 mt-1">
-        <label id="__addonRef__-sso-username" data-l10n-id="pref-sso-username-label"
-          data-l10n-args="{ 'username': 'username' }"></label>
-        <button id="__addonRef__-sso-logout" data-l10n-id="pref-sso-logout-button"></button>
+        <label id="__addonRef__-sso-username"
+               data-l10n-id="pref-sso-username-label"
+               data-l10n-args="{ 'username': 'username' }"></label>
+        <button id="__addonRef__-sso-logout"
+                data-l10n-id="pref-sso-logout-button"></button>
       </hbox>
-      <hbox class="flex gap-1 mt-1 items-center">
-        <hbox class="flex items-center" id="__addonRef__-current-nutstore-webdav-success-container" hidden="true">
-          <label id="__addonRef__-current-nutstore-webdav-success"
-            data-l10n-id="pref-current-nutstore-webdav-success"></label>
-          <span class="w-5 h-5 icon-[lucide--check] text-green-500"></span>
-        </hbox>
-        <hbox class="flex items-center" id="__addonRef__-current-nutstore-webdav-error-container">
-          <label id="__addonRef__-current-nutstore-webdav-error"
-            data-l10n-id="pref-current-nutstore-webdav-error"></label>
-          <span class="w-5 h-5 icon-[lucide--x] text-red-500"></span>
-        </hbox>
+      <html:div id="__addonRef__-nutstore-webdav-setting-container">
+        <hbox class="flex gap-1 mt-1 items-center">
+          <hbox class="flex items-center"
+                id="__addonRef__-current-nutstore-webdav-success-container"
+                hidden="true">
+            <label id="__addonRef__-current-nutstore-webdav-success"
+                   data-l10n-id="pref-current-nutstore-webdav-success"></label>
+            <span class="w-5 h-5 icon-[lucide--check] text-green-500"></span>
+          </hbox>
+          <hbox class="flex items-center"
+                id="__addonRef__-current-nutstore-webdav-error-container">
+            <label id="__addonRef__-current-nutstore-webdav-error"
+                   data-l10n-id="pref-current-nutstore-webdav-error"></label>
+            <span class="w-5 h-5 icon-[lucide--x] text-red-500"></span>
+          </hbox>
 
-        <button id="__addonRef__-force-fix-nutstore-webdav-button"
-          data-l10n-id="pref-force-fix-nutstore-webdav-button"></button>
+          <button id="__addonRef__-force-fix-nutstore-webdav-button"
+                  data-l10n-id="pref-force-fix-nutstore-webdav-button"></button>
+        </hbox>
+        <p class="text-xs text-gray-400 mt-4">登录坚果云之后你仍需要登录 Zotero 才能开启同步</p>
+      </html:div>
 
-      </hbox>
+
     </vbox>
+  </groupbox>
+
+  <groupbox>
+    <label>
+      <html:h2 data-l10n-id="pref-enhanced-webdav-title"></html:h2>
+    </label>
+    <hbox id="__addonRef__-sso-button-container"
+          align="center">
+      <checkbox id="__addonRef__-enhanced-webdav-checkbox"
+                native="true"
+                preference="nutstore-enhanced-webdav"
+                data-l10n-id="pref-enhanced-webdav-checkbox" />
+    </hbox>
+    <p class="text-xs text-gray-400 mt-4">
+      <html:span data-l10n-id="pref-enhanced-webdav-description"></html:span>
+    </p>
   </groupbox>
 </groupbox>

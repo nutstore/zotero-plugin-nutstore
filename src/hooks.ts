@@ -1,4 +1,4 @@
-import { registerNutstoreSSOProtocol } from './modules/nutstore'
+import { registerNutstoreSSOProtocol } from './modules/nutstore-sso'
 import { registerPerfObserver, registerPrefs, registerPrefsScripts } from './modules/preference'
 import { initLocale } from './utils/locale'
 import { createZToolkit } from './utils/ztoolkit'

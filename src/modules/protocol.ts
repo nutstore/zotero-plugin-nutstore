@@ -4,7 +4,7 @@ import { reInitZoteroSync } from '../utils/nutstore'
 import { setPref } from '../utils/prefs'
 import { registerCustomProtocolPath } from '../utils/protocol'
 import { getSSOMethod } from '../utils/sso'
-import { forceSetNutstoreWebdavPerfs, updateNutstorePerfs } from './nutstore'
+import { forceSetNutstoreWebdavPerfs, updateNutstorePerfs } from './nutstore-sso'
 
 class SSOProtocol implements ProtocolExtension {
   noContent = true

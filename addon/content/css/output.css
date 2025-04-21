@@ -15,7 +15,10 @@
   :root, :host {
     --color-red-500: oklch(63.7% 0.237 25.331);
     --color-green-500: oklch(72.3% 0.219 149.579);
+    --color-gray-400: oklch(70.7% 0.022 261.325);
     --spacing: 0.25rem;
+    --text-xs: 0.75rem;
+    --text-xs--line-height: calc(1 / 0.75);
   }
 }
 @layer utilities {
@@ -33,6 +36,9 @@
   }
   .mt-1 {
     margin-top: calc(var(--spacing) * 1);
+  }
+  .mt-4 {
+    margin-top: calc(var(--spacing) * 4);
   }
   .icon-\[lucide--check\] {
     display: inline-block;
@@ -86,6 +92,13 @@
   }
   .gap-1 {
     gap: calc(var(--spacing) * 1);
+  }
+  .text-xs {
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+  }
+  .text-gray-400 {
+    color: var(--color-gray-400);
   }
   .text-green-500 {
     color: var(--color-green-500);

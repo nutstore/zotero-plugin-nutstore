@@ -8,6 +8,8 @@ const basicTool = new BasicTool()
 if (!basicTool.getGlobal('Zotero')[config.addonInstance]) {
   _globalThis.addon = new Addon()
   _globalThis.console = basicTool.getGlobal('window').console
+  _globalThis.OS = ChromeUtils.importESModule('chrome://zotero/content/osfile.mjs').OS
+
   defineGlobal('ztoolkit', () => {
     return _globalThis.addon.data.ztoolkit
   })
