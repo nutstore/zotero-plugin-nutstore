@@ -1,24 +1,24 @@
-# Nutstore Zotero SSO Plugin
+# Nutstore Zotero Plugin
 
 [![zotero target version](https://img.shields.io/badge/Zotero-7-green?style=flat-square&logo=zotero&logoColor=CC2936)](https://www.zotero.org)
 [![Using Zotero Plugin Template](https://img.shields.io/badge/Using-Zotero%20Plugin%20Template-blue?style=flat-square&logo=github)](https://github.com/windingwind/zotero-plugin-template)
 
-This is a Zotero plugin for Nutstore SSO.
+This is a Zotero plugin for Nutstore.
 
 <div align=center><img src="./doc/nutstore_logo.svg" width="800px"></img></div>
 
 ## 🤔 What can it do?
 
 - One-click login to nutstore no longer requires cumbersome webdav configuration
-- Force fix current webdav configuration
+- Enhanced webdav with Nutstore desktop client (Avoid the issues caused by directly using Nutstore webdav.)
 
 ## 📦 Install Guide
 
 - Download the plugin (.xpi file) from below.
 
-  - [Latest Version: 1.0.6](https://github.com/nutstore/zotero-plugin-nutstore-sso/releases/download/v1.0.4/zotero-plugin-nutstore-sso.xpi)
-  - [Latest Stable](https://github.com/nutstore/zotero-plugin-nutstore-sso/releases/latest)
-  - [All Releases](https://github.com/nutstore/zotero-plugin-nutstore-sso/releases)
+  - [Latest Version: 1.0.6](https://github.com/nutstore/zotero-plugin-nutstore/releases/download/v1.0.6/zotero-plugin-nutstore.xpi)
+  - [Latest Stable](https://github.com/nutstore/zotero-plugin-nutstore/releases/latest)
+  - [All Releases](https://github.com/nutstore/zotero-plugin-nutstore/releases)
 
   _Note_: If you're using Firefox as your browser, right-click the `.xpi` and select "Save As.."
 

@@ -1,25 +1,25 @@
 {
-  "name": "zotero-plugin-nutstore-sso",
+  "name": "zotero-plugin-nutstore",
   "type": "module",
   "version": "1.0.6",
   "packageManager": "pnpm@10.7.0",
-  "description": "Nutstore sso plugin for Zotero",
+  "description": "Nutstore plugin for Zotero.",
   "config": {
-    "addonName": "Nutstore SSO",
+    "addonName": "Nutstore",
     "addonID": "register02@cn.nutstore.net",
-    "addonRef": "zotero-plugin-nutstore-sso",
-    "addonInstance": "ZoteroNutstoreSSO",
-    "prefsPrefix": "extensions.zotero.zotero-plugin-nutstore-sso"
+    "addonRef": "zotero-plugin-nutstore",
+    "addonInstance": "ZoteroNutstore",
+    "prefsPrefix": "extensions.zotero.zotero-plugin-nutstore"
   },
   "author": "nutstore",
   "license": "AGPL-3.0-or-later",
-  "homepage": "https://github.com/nutstore/zotero-plugin-nutstore-sso#readme",
+  "homepage": "https://github.com/nutstore/zotero-plugin-nutstore#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nutstore/zotero-plugin-nutstore-sso.git"
+    "url": "git+https://github.com/nutstore/zotero-plugin-nutstore.git"
   },
   "bugs": {
-    "url": "https://github.com/nutstore/zotero-plugin-nutstore-sso/issues"
+    "url": "https://github.com/nutstore/zotero-plugin-nutstore/issues"
   },
   "scripts": {
     "dev": "pnpm run dev:zotero & pnpm run dev:tw",
