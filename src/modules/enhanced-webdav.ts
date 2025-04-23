@@ -30,7 +30,8 @@ export async function handleEnhancedWebdav() {
   if (isEnhancedWebdav) {
     hideNutstoreSSOWebdav()
     const homedir = OS.Constants.Path.homeDir
-    const config = await IOUtils.readJSON(PathUtils.join(homedir, 'Documents', 'webdav-test.json')) as EnhancedWebdavConfig
+
+    const config = await IOUtils.readJSON(PathUtils.join(homedir, 'AppData', 'Roaming', 'Nutstore', 'Zotero', 'appsettings.json')) as EnhancedWebdavConfig
 
     const token = getPref('nutstore-sso-token')
     const oauthInfo = (await getSSOMethod()).decryptToken(token)
@@ -50,6 +51,20 @@ export async function handleEnhancedWebdav() {
     restoreWebdavConfig()
     showNutstoreSSOWebdav()
   }
+}
+
+export function showEnhancedWebdav() {
+  // Enhanced webdav is only supported on Windows now
+  if (!Zotero.isWin)
+    return
+
+  const prefWin = getPrefWin()
+  showElement(`${config.addonRef}-enhanced-webdav-groupbox`, prefWin)
+}
+
+export function hideEnhancedWebdav() {
+  const prefWin = getPrefWin()
+  hideElement(`${config.addonRef}-enhanced-webdav-groupbox`, prefWin)
 }
 
 export function hideNutstoreSSOWebdav() {

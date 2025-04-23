@@ -1,6 +1,6 @@
 import { config } from '../../package.json'
 import { getString } from '../utils/locale'
-import { clearPref, getPrefWin } from '../utils/prefs'
+import { clearPref, getPrefWin, setPref } from '../utils/prefs'
 import { getSSOMethod } from '../utils/sso'
 import { handleEnhancedWebdav } from './enhanced-webdav'
 import { clearNutstoreWebdavPerfs, forceSetNutstoreWebdavPerfs, syncPerfObserver, updateNutstorePerfs } from './nutstore-sso'
@@ -74,6 +74,7 @@ function bindPrefEvents() {
     clearNutstoreWebdavPerfs()
 
     clearPref('nutstore-sso-token')
+    setPref('nutstore-enhanced-webdav', false)
     updateNutstorePerfs()
   })
 
