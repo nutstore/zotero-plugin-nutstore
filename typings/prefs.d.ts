@@ -10,7 +10,6 @@ declare namespace _ZoteroTypes {
       "nutstore-env-mode": string;
       "nutstore-sso-token": string;
       "nutstore-webdav-force-set": boolean;
-      "nutstore-enhanced-webdav": boolean;
     };
   }
 }

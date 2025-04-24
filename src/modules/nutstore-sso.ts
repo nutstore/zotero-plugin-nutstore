@@ -3,7 +3,6 @@ import { getElementById, hideElement, showElement } from '../utils/dom'
 import { clearStoragePasswordInputValue, getNutstoreWebdavUrl, isNutstoreWebdav, reInitZoteroSync } from '../utils/nutstore'
 import { getPref, getPrefWin, setPref } from '../utils/prefs'
 import { getSSOMethod } from '../utils/sso'
-import { hideEnhancedWebdav, showEnhancedWebdav } from './enhanced-webdav'
 
 export { registerNutstoreSSOProtocol } from './protocol'
 
@@ -24,13 +23,12 @@ export async function updateNutstoreSSOPerfs() {
     usernameLabel.dataset.l10nArgs = JSON.stringify({ username: oauthInfo.username })
     hideElement(`${config.addonRef}-sso-button-container`, prefWin)
     showElement(`${config.addonRef}-authorized-container`, prefWin)
-    showEnhancedWebdav()
+
     updateForceButtonEnabled()
   }
   else {
     showElement(`${config.addonRef}-sso-button-container`, prefWin)
     hideElement(`${config.addonRef}-authorized-container`, prefWin)
-    hideEnhancedWebdav()
 
     updateForceButtonEnabled()
   }
@@ -126,4 +124,3 @@ export async function forceSetNutstoreWebdavPerfs() {
   setPref('nutstore-webdav-force-set', true)
   updateNutstoreSSOPerfs()
 }
-

@@ -2,6 +2,7 @@ import { config } from '../../package.json'
 import { hideElement, showElement } from '../utils/dom'
 import { getPref, getPrefWin } from '../utils/prefs'
 import { isSyncStorageEnabled } from '../utils/ztoolkit'
+import { updateEnhancedWebdav } from './enhanced-webdav'
 import { updateNutstoreSSOPerfs } from './nutstore-sso'
 
 export async function updateNutstorePerfs() {
@@ -24,7 +25,7 @@ export async function updateNutstorePerfs() {
   }
   else if (envMode === 'enhanced') {
     showNutstoreEnhancedWebdav()
-    // updateNutstoreEnhancedPerfs()
+    updateEnhancedWebdav()
   }
 }
 

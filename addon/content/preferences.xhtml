@@ -15,9 +15,10 @@
 
 
   <groupbox id="__addonRef__-sso-groupbox"
-            class="hidden my-1">
+            class="hidden">
     <label>
-      <html:h2 data-l10n-id="pref-sso-title"></html:h2>
+      <html:h2 data-l10n-id="pref-sso-title"
+               class="my-1"></html:h2>
     </label>
     <hbox id="__addonRef__-sso-button-container"
           align="center">
@@ -59,13 +60,20 @@
   </groupbox>
 
   <groupbox id="__addonRef__-enhanced-webdav-groupbox"
-            class="hidden my-1">
+            class="hidden">
     <label>
-      <html:h2 data-l10n-id="pref-enhanced-webdav-title"></html:h2>
+      <html:div data-l10n-id="pref-enhanced-webdav-title"
+                class="my-1 font-semibold text-[14px]"></html:div>
     </label>
-    <hbox id="__addonRef__-sso-button-container"
-          align="center">
-    </hbox>
+    <vbox id="__addonRef__-enhanced-webdav-container">
+      <hbox class="flex gap-1 mt-1">
+        <label id="__addonRef__-enhanced-webdav-username"
+               data-l10n-id="pref-enhanced-webdav-username-label"
+               data-l10n-args="{ 'username': 'username' }"></label>
+        <button id="__addonRef__-enhanced-webdav-server-verify-button"
+                data-l10n-id="pref-enhanced-webdav-server-verify-button"></button>
+      </hbox>
+    </vbox>
     <p class="text-xs text-gray-400 mt-4">
       <html:span data-l10n-id="pref-enhanced-webdav-description"></html:span>
     </p>

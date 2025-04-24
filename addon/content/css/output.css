@@ -7,6 +7,7 @@
       --tw-rotate-z: rotateZ(0);
       --tw-skew-x: skewX(0);
       --tw-skew-y: skewY(0);
+      --tw-font-weight: initial;
     }
   }
 }
@@ -20,6 +21,11 @@
     --spacing: 0.25rem;
     --text-xs: 0.75rem;
     --text-xs--line-height: calc(1 / 0.75);
+    --text-lg: 1.125rem;
+    --text-lg--line-height: calc(1.75 / 1.125);
+    --text-xl: 1.25rem;
+    --text-xl--line-height: calc(1.75 / 1.25);
+    --font-weight-semibold: 600;
   }
 }
 @layer utilities {
@@ -101,6 +107,13 @@
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
   }
+  .text-\[14px\] {
+    font-size: 14px;
+  }
+  .font-semibold {
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+  }
   .text-gray-400 {
     color: var(--color-gray-400);
   }
@@ -138,4 +151,8 @@
   syntax: "*";
   inherits: false;
   initial-value: skewY(0);
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
 }
