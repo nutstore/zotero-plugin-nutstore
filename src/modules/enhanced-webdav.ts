@@ -68,6 +68,15 @@ export function restoreWebdavConfig() {
   forceSetNutstoreWebdavPerfs()
 }
 
-export function handleClickEnhancedWebdavCheckbox() {
+export async function handleClickEnhancedWebdavServerVerifyButton() {
+  const win = getPrefWin()!
+  const controller = Zotero.Sync.Runner.getStorageController('webdav')
 
+  try {
+    await controller.checkServer()
+    Zotero.alert(win, getString('enhanced-webdav-server-verify-success-title'), getString('enhanced-webdav-server-verify-success-message'))
+  }
+  catch {
+    Zotero.alert(win, getString('enhanced-webdav-server-verify-failed-title'), getString('enhanced-webdav-server-verify-failed-message'))
+  }
 }

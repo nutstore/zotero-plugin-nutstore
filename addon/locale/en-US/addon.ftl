@@ -10,3 +10,9 @@ storage-not-enabled-message = Storage sync is not enabled, please enable it firs
 
 username-not-match-title = Username Not Match
 username-not-match-message = The username in the Nutstore SSO token does not match the username in the webdav-test.json file
+
+enhanced-webdav-server-verify-success-title = Nutstore service verified
+enhanced-webdav-server-verify-success-message = Nutstore service verified, please continue to use the Nutstore client for synchronization.
+
+enhanced-webdav-server-verify-failed-title = Nutstore service verification failed
+enhanced-webdav-server-verify-failed-message = Nutstore service verification failed, please check if the Nutstore client is running normally and the Zotero synchronization settings.
