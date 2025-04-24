@@ -80,3 +80,15 @@ export async function handleClickEnhancedWebdavServerVerifyButton() {
     Zotero.alert(win, getString('enhanced-webdav-server-verify-failed-title'), getString('enhanced-webdav-server-verify-failed-message'))
   }
 }
+
+export async function handleClickEnhancedWebdavServerFixButton() {
+  const win = getPrefWin()!
+  const enhancedWebdavConfig = await getEnhancedConfig()
+
+  if (!enhancedWebdavConfig) {
+    Zotero.alert(win, getString('enhanced-webdav-config-not-found-title'), getString('enhanced-webdav-config-not-found-message'))
+    return
+  }
+
+  setEnhanceWebdav(enhancedWebdavConfig)
+}

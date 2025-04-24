@@ -16,5 +16,7 @@ pref-enhanced-webdav-server-verify-button =
     .label = 验证坚果云服务
 pref-enhanced-webdav-username-label = 用户名：{ $username }
 
+pref-enhanced-webdav-server-fix-button =
+    .label = 修复坚果云服务
 
 pref-disabled-storage-warning = 当前未启用同步存储，请在启用同步功能后使用

@@ -4,7 +4,7 @@ import { getEnhancedConfig } from '../utils/enhanced-config'
 import { getString } from '../utils/locale'
 import { clearPref, getPrefWin, setPref } from '../utils/prefs'
 import { getSSOMethod } from '../utils/sso'
-import { handleClickEnhancedWebdavServerVerifyButton } from './enhanced-webdav'
+import { handleClickEnhancedWebdavServerFixButton, handleClickEnhancedWebdavServerVerifyButton } from './enhanced-webdav'
 import { clearNutstoreWebdavPerfs, forceSetNutstoreWebdavPerfs, updateNutstoreSSOPerfs } from './nutstore-sso'
 
 export function registerPrefs() {
@@ -99,6 +99,12 @@ function bindPrefEvents() {
   )?.addEventListener('command', () => {
     handleClickEnhancedWebdavServerVerifyButton()
   })
+
+  window.document.querySelector(
+    `#${config.addonRef}-enhanced-webdav-server-fix-button`,
+  )?.addEventListener('command', () => {
+    handleClickEnhancedWebdavServerFixButton()
+  })
 }
 
 async function initNutstoreEnvMode() {
@@ -110,5 +116,5 @@ async function initNutstoreEnvMode() {
     }
   }
 
-  setPref('nutstore-env-mode', 'enhanced')
+  setPref('nutstore-env-mode', 'sso')
 }

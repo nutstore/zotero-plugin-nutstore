@@ -16,4 +16,7 @@ pref-enhanced-webdav-server-verify-button =
     .label = Verify Nutstore Service
 pref-enhanced-webdav-username-label = Username: { $username }
 
+pref-enhanced-webdav-server-fix-button =
+    .label = Fix Nutstore Service
+
 pref-disabled-storage-warning = Sync storage is not enabled, please enable sync storage first.
