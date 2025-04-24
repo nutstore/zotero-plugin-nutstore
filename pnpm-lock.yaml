@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@nutstore/sso-js':
+        specifier: ^0.0.4
+        version: 0.0.4
       '@nutstore/sso-wasm':
         specifier: ^0.0.2
         version: 0.0.2
@@ -486,6 +489,9 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@nutstore/sso-js@0.0.4':
+    resolution: {integrity: sha512-/HgyBoOeGa1WH1L6DpegyDO+/fsq5afT9wfter6pUq6XcUlPoZWa8TYxOqbfPFRybVYLP8srbp6cJmV93O9XXQ==, tarball: https://npm.pkg.github.com/download/@nutstore/sso-js/0.0.4/44f3c96d900823e7e74d2c2294c641d88f87573e}
 
   '@nutstore/sso-wasm@0.0.2':
     resolution: {integrity: sha512-+R0TONta7cCnz0RaIecyTpgPtaTj3KWP4G4CECambrR/7KvoFyvgd23XYE4zsEHUVX3/Vcv4rYHwmCCHSyfIfw==, tarball: https://npm.pkg.github.com/download/@nutstore/sso-wasm/0.0.2/aa17b3d3d2f42a37bb75f1c1c8152b42615d580e}
@@ -2826,6 +2832,8 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
+
+  '@nutstore/sso-js@0.0.4': {}
 
   '@nutstore/sso-wasm@0.0.2': {}
 

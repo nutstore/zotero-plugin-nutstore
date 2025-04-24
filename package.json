@@ -33,6 +33,7 @@
     "update-deps": "npm update --save"
   },
   "dependencies": {
+    "@nutstore/sso-js": "^0.0.4",
     "@nutstore/sso-wasm": "^0.0.2",
     "bluebird": "^3.7.2",
     "zotero-plugin-toolkit": "^4.1.2"

@@ -3,7 +3,7 @@ import { config } from '../../package.json'
 import { getEnhancedConfig } from '../utils/enhanced-config'
 import { getString } from '../utils/locale'
 import { clearPref, getPrefWin, setPref } from '../utils/prefs'
-import { getSSOMethod } from '../utils/sso'
+import { launchOAuthUrl } from '../utils/sso'
 import { handleClickEnhancedWebdavServerFixButton, handleClickEnhancedWebdavServerVerifyButton } from './enhanced-webdav'
 import { clearNutstoreWebdavPerfs, forceSetNutstoreWebdavPerfs, updateNutstoreSSOPerfs } from './nutstore-sso'
 
@@ -75,7 +75,6 @@ function bindPrefEvents() {
   window.document.querySelector(
     `#${config.addonRef}-sso-login`,
   )?.addEventListener('command', async () => {
-    const { launchOAuthUrl } = await getSSOMethod()
     launchOAuthUrl()
   })
 

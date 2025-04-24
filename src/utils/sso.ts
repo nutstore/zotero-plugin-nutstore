@@ -1,4 +1,4 @@
-import { once } from './F'
+import { _dont_use_in_prod_createOAuthUrl, _dont_use_in_prod_decryptSecret as _dont_use_in_prod_decrypt, createOAuthUrl, decryptSecret as decrypt } from '@nutstore/sso-js'
 
 export interface OAuthResponse {
   username: string
@@ -6,30 +6,22 @@ export interface OAuthResponse {
   access_token: string
 }
 
-const importSSO = once(async () => {
-  return import('@nutstore/sso-wasm')
-})
+async function launchOAuthUrl() {
+  const url = await (addon.data.env === 'development' ? _dont_use_in_prod_createOAuthUrl : createOAuthUrl)({ app: 'zotero' })
+  Zotero.launchURL(url)
+}
 
-export async function getSSOMethod() {
-  const sso = await importSSO()
-  ztoolkit.log('sso', sso)
-  function launchOAuthUrl() {
-    const url = (addon.data.env === 'development' ? sso._dont_use_in_prod_createOAuthUrl : sso.createOAuthUrl)({ app: 'zotero' })
-    Zotero.launchURL(url)
+async function decryptToken(token: string) {
+  try {
+    const result = await (addon.data.env === 'development' ? _dont_use_in_prod_decrypt : decrypt)({ app: 'zotero', s: token })
+    return JSON.parse(result) as OAuthResponse
   }
+  catch (e) {
+    ztoolkit.log('[Nutstore SSO] decrypt error', e)
+  }
+}
 
-  function decryptToken(token: string) {
-    try {
-      const result = (addon.data.env === 'development' ? sso._dont_use_in_prod_decrypt : sso.decrypt)({ app: 'zotero', s: token })
-      return JSON.parse(result) as OAuthResponse
-    }
-    catch (e) {
-      ztoolkit.log('[Nutstore SSO] decrypt error', e)
-    }
-  }
-
-  return {
-    launchOAuthUrl,
-    decryptToken,
-  }
+export {
+  decryptToken,
+  launchOAuthUrl,
 }

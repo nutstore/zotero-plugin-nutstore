@@ -2,7 +2,7 @@ import { config } from '../../package.json'
 import { getElementById, hideElement, showElement } from '../utils/dom'
 import { clearStoragePasswordInputValue, getNutstoreWebdavUrl, isNutstoreWebdav, reInitZoteroSync } from '../utils/nutstore'
 import { getPref, getPrefWin, setPref } from '../utils/prefs'
-import { getSSOMethod } from '../utils/sso'
+import { decryptToken } from '../utils/sso'
 
 export { registerNutstoreSSOProtocol } from './protocol'
 
@@ -13,7 +13,7 @@ export async function updateNutstoreSSOPerfs() {
   const nutstoreToken = getPref('nutstore-sso-token')
 
   if (nutstoreToken) {
-    const oauthInfo = (await getSSOMethod()).decryptToken(nutstoreToken)
+    const oauthInfo = await decryptToken(nutstoreToken)
 
     const usernameLabel = getElementById(`${config.addonRef}-sso-username`, prefWin)
 
@@ -48,7 +48,7 @@ async function updateForceButtonEnabled() {
     return
   }
 
-  const oauthInfo = (await getSSOMethod()).decryptToken(token)
+  const oauthInfo = await decryptToken(token)
 
   if (!oauthInfo) {
     toggleForceFixNutstoreWebdavButton('enabled')
@@ -87,7 +87,7 @@ function toggleForceFixNutstoreWebdavButton(status: 'enabled' | 'disabled') {
 
 export async function clearNutstoreWebdavPerfs() {
   const nutstoreToken = getPref('nutstore-sso-token')
-  const oauthInfo = (await getSSOMethod()).decryptToken(nutstoreToken)
+  const oauthInfo = await decryptToken(nutstoreToken)
   if (!oauthInfo)
     return
   const forceSet = getPref('nutstore-webdav-force-set')
@@ -108,7 +108,7 @@ export async function forceSetNutstoreWebdavPerfs() {
   const nutstoreToken = getPref('nutstore-sso-token')
   if (!nutstoreToken)
     return
-  const oauthInfo = (await getSSOMethod()).decryptToken(nutstoreToken)
+  const oauthInfo = await decryptToken(nutstoreToken)
   if (!oauthInfo)
     return
 

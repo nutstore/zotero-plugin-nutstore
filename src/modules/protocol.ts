@@ -1,9 +1,8 @@
 import type { ProtocolExtension } from '../utils/protocol'
 import { getString } from '../utils/locale'
-import { reInitZoteroSync } from '../utils/nutstore'
 import { setPref } from '../utils/prefs'
 import { registerCustomProtocolPath } from '../utils/protocol'
-import { getSSOMethod } from '../utils/sso'
+import { decryptToken } from '../utils/sso'
 import { forceSetNutstoreWebdavPerfs, updateNutstoreSSOPerfs } from './nutstore-sso'
 
 class SSOProtocol implements ProtocolExtension {
@@ -26,8 +25,7 @@ export function registerNutstoreSSOProtocol() {
 }
 
 async function onNutstoreSSOProtocolCall(token: string) {
-  const { decryptToken } = await getSSOMethod()
-  const result = decryptToken(token)
+  const result = await decryptToken(token)
 
   if (result) {
     ztoolkit.log('[Nutstore SSO] decrypt success', result)
