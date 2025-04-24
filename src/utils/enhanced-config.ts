@@ -25,7 +25,7 @@ export async function getEnhancedConfig() {
 }
 
 function getEnhancedConfigPath() {
-  const homedir = OS.Constants.Path.homeDir
+  const homedir = (OS.Constants as any).Path.homeDir
 
   if (Zotero.isMac) {
     return PathUtils.join(homedir, 'Library', 'Application Support', 'Nutstore', 'Zotero', 'appsettings.json')
