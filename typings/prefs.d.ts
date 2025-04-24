@@ -7,6 +7,7 @@
 declare namespace _ZoteroTypes {
   interface Prefs {
     PluginPrefsMap: {
+      "nutstore-env-mode": string;
       "nutstore-sso-token": string;
       "nutstore-webdav-force-set": boolean;
       "nutstore-enhanced-webdav": boolean;

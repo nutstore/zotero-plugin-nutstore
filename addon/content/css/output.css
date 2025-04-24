@@ -14,6 +14,7 @@
 @layer theme {
   :root, :host {
     --color-red-500: oklch(63.7% 0.237 25.331);
+    --color-yellow-400: oklch(85.2% 0.199 91.936);
     --color-green-500: oklch(72.3% 0.219 149.579);
     --color-gray-400: oklch(70.7% 0.022 261.325);
     --spacing: 0.25rem;
@@ -33,6 +34,9 @@
   }
   .static {
     position: static;
+  }
+  .my-1 {
+    margin-block: calc(var(--spacing) * 1);
   }
   .mt-1 {
     margin-top: calc(var(--spacing) * 1);
@@ -105,6 +109,9 @@
   }
   .text-red-500 {
     color: var(--color-red-500);
+  }
+  .text-yellow-400 {
+    color: var(--color-yellow-400);
   }
 }
 @property --tw-rotate-x {

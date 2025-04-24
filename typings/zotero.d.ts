@@ -106,5 +106,11 @@ declare namespace Zotero {
       }
     }
 
+    namespace Data {
+      namespace Local {
+        function getAPIKey(): Promise<string>
+        function setAPIKey(apiKey: string): Promise<void>
+      }
+    }
   }
 }

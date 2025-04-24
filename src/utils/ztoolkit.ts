@@ -30,3 +30,7 @@ function initZToolkit(_ztoolkit: ReturnType<typeof createZToolkit>) {
 }
 
 export { createZToolkit }
+
+export async function isSyncStorageEnabled() {
+  return (await Zotero.Sync.Data.Local.getAPIKey()) && Zotero.Prefs.get('sync.storage.enabled')
+}

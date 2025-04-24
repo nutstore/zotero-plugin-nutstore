@@ -4,7 +4,7 @@ import { reInitZoteroSync } from '../utils/nutstore'
 import { setPref } from '../utils/prefs'
 import { registerCustomProtocolPath } from '../utils/protocol'
 import { getSSOMethod } from '../utils/sso'
-import { forceSetNutstoreWebdavPerfs, updateNutstorePerfs } from './nutstore-sso'
+import { forceSetNutstoreWebdavPerfs, updateNutstoreSSOPerfs } from './nutstore-sso'
 
 class SSOProtocol implements ProtocolExtension {
   noContent = true
@@ -32,7 +32,7 @@ async function onNutstoreSSOProtocolCall(token: string) {
   if (result) {
     ztoolkit.log('[Nutstore SSO] decrypt success', result)
     setPref('nutstore-sso-token', token)
-    updateNutstorePerfs()
+    updateNutstoreSSOPerfs()
 
     const confirm = Zotero.Prompt.confirm({
       window: Zotero.getMainWindow(),
@@ -46,7 +46,7 @@ async function onNutstoreSSOProtocolCall(token: string) {
       forceSetNutstoreWebdavPerfs()
     }
     else {
-      updateNutstorePerfs()
+      updateNutstoreSSOPerfs()
     }
   }
 }

@@ -1,56 +1,36 @@
+import type { EnhancedWebdavConfig } from '../utils/enhanced-config'
 import { config } from '../../package.json'
 import { hideElement, showElement } from '../utils/dom'
+import { getEnhancedConfig } from '../utils/enhanced-config'
 import { getString } from '../utils/locale'
 import { reInitZoteroSync } from '../utils/nutstore'
-import { getPref, getPrefWin, setPref } from '../utils/prefs'
+import { getPref, getPrefWin } from '../utils/prefs'
 import { getSSOMethod } from '../utils/sso'
 import { forceSetNutstoreWebdavPerfs } from './nutstore-sso'
 
-interface EnhancedWebdavConfig {
-  WebDavServer: {
-    Scheme: string
-    Url: string
-    Credentials: {
-      Username: string
-      Password: string
-    }
-  }
-}
-
 export async function handleEnhancedWebdav() {
-  const isEnhancedWebdav = getPref('nutstore-enhanced-webdav')
-  const storageEnabled = Zotero.Prefs.get('sync.storage.enabled')
   const win = getPrefWin()!
 
-  if (win && !storageEnabled) {
-    Zotero.alert(win, getString('storage-not-enabled-title'), getString('storage-not-enabled-message'))
+  const config = await getEnhancedConfig()!
+
+  if (!config) {
+    Zotero.alert(win, getString('enhanced-webdav-config-not-found-title'), getString('enhanced-webdav-config-not-found-message'))
     return
   }
 
-  if (isEnhancedWebdav) {
-    hideNutstoreSSOWebdav()
-    const homedir = OS.Constants.Path.homeDir
+  const token = getPref('nutstore-sso-token')
+  const oauthInfo = (await getSSOMethod()).decryptToken(token)
 
-    const config = await IOUtils.readJSON(PathUtils.join(homedir, 'AppData', 'Roaming', 'Nutstore', 'Zotero', 'appsettings.json')) as EnhancedWebdavConfig
+  const tokenUsername = oauthInfo?.username
+  const configUsername = config.WebDavServer.Credentials.Username
 
-    const token = getPref('nutstore-sso-token')
-    const oauthInfo = (await getSSOMethod()).decryptToken(token)
-
-    const tokenUsername = oauthInfo?.username
-    const configUsername = config.WebDavServer.Credentials.Username
-
-    if (tokenUsername !== configUsername) {
-      Zotero.alert(win, getString('username-not-match-title'), getString('username-not-match-message'))
-      return
-    }
-
-    setEnhanceWebdav(config)
-    hideNutstoreSSOWebdav()
+  if (tokenUsername !== configUsername) {
+    Zotero.alert(win, getString('username-not-match-title'), getString('username-not-match-message'))
+    return
   }
-  else {
-    restoreWebdavConfig()
-    showNutstoreSSOWebdav()
-  }
+
+  setEnhanceWebdav(config)
+  hideNutstoreSSOWebdav()
 }
 
 export function showEnhancedWebdav() {

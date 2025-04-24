@@ -7,7 +7,15 @@
 </head>
 
 <groupbox onload="Zotero.__addonInstance__.hooks.onPrefsEvent('load', { window });">
-  <groupbox>
+  <hbox id="__addonRef__-disabled-storage-warning-container"
+        class="hidden">
+    <p data-l10n-id="pref-disabled-storage-warning"
+       class="text-yellow-400"></p>
+  </hbox>
+
+
+  <groupbox id="__addonRef__-sso-groupbox"
+            class="hidden my-1">
     <label>
       <html:h2 data-l10n-id="pref-sso-title"></html:h2>
     </label>
@@ -51,16 +59,12 @@
   </groupbox>
 
   <groupbox id="__addonRef__-enhanced-webdav-groupbox"
-            class="hidden">
+            class="hidden my-1">
     <label>
       <html:h2 data-l10n-id="pref-enhanced-webdav-title"></html:h2>
     </label>
     <hbox id="__addonRef__-sso-button-container"
           align="center">
-      <checkbox id="__addonRef__-enhanced-webdav-checkbox"
-                native="true"
-                preference="nutstore-enhanced-webdav"
-                data-l10n-id="pref-enhanced-webdav-checkbox" />
     </hbox>
     <p class="text-xs text-gray-400 mt-4">
       <html:span data-l10n-id="pref-enhanced-webdav-description"></html:span>

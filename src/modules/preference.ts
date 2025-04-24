@@ -1,9 +1,11 @@
+import { updateNutstorePerfs } from '.'
 import { config } from '../../package.json'
+import { getEnhancedConfig } from '../utils/enhanced-config'
 import { getString } from '../utils/locale'
 import { clearPref, getPrefWin, setPref } from '../utils/prefs'
 import { getSSOMethod } from '../utils/sso'
 import { handleEnhancedWebdav } from './enhanced-webdav'
-import { clearNutstoreWebdavPerfs, forceSetNutstoreWebdavPerfs, syncPerfObserver, updateNutstorePerfs } from './nutstore-sso'
+import { clearNutstoreWebdavPerfs, forceSetNutstoreWebdavPerfs, updateNutstoreSSOPerfs } from './nutstore-sso'
 
 export function registerPrefs() {
   Zotero.PreferencePanes.register({
@@ -12,6 +14,8 @@ export function registerPrefs() {
     label: getString('prefs-title'),
     image: `chrome://${addon.data.config.addonRef}/content/icons/favicon.png`,
   })
+
+  initNutstoreEnvMode()
 }
 
 export async function registerPrefsScripts(_window: Window) {
@@ -32,15 +36,22 @@ export async function registerPrefsScripts(_window: Window) {
 
 export function registerPerfObserver() {
   const syncPerfIDS = [
-    Zotero.Prefs.registerObserver('sync.storage.enabled', syncPerfObserver),
-    Zotero.Prefs.registerObserver('sync.storage.protocol', syncPerfObserver),
-    Zotero.Prefs.registerObserver('sync.storage.scheme', syncPerfObserver),
-    Zotero.Prefs.registerObserver('sync.storage.username', syncPerfObserver),
-    Zotero.Prefs.registerObserver('sync.storage.url', syncPerfObserver),
+    Zotero.Prefs.registerObserver('sync.storage.enabled', updateNutstoreSSOPerfs),
+    Zotero.Prefs.registerObserver('sync.storage.protocol', updateNutstoreSSOPerfs),
+    Zotero.Prefs.registerObserver('sync.storage.scheme', updateNutstoreSSOPerfs),
+    Zotero.Prefs.registerObserver('sync.storage.username', updateNutstoreSSOPerfs),
+    Zotero.Prefs.registerObserver('sync.storage.url', updateNutstoreSSOPerfs),
   ]
+
+  const unregisterNotifier = Zotero.Notifier.registerObserver({
+    notify: () => {
+      updateNutstorePerfs()
+    },
+  }, ['api-key'])
 
   Zotero.addShutdownListener(() => {
     syncPerfIDS.forEach(id => Zotero.Prefs.unregisterObserver(id))
+    Zotero.Notifier.unregisterObserver(unregisterNotifier)
   })
 }
 
@@ -75,7 +86,7 @@ function bindPrefEvents() {
 
     clearPref('nutstore-sso-token')
     setPref('nutstore-enhanced-webdav', false)
-    updateNutstorePerfs()
+    updateNutstoreSSOPerfs()
   })
 
   window.document.querySelector(
@@ -89,4 +100,16 @@ function bindPrefEvents() {
   )?.addEventListener('command', () => {
     handleEnhancedWebdav()
   })
+}
+
+async function initNutstoreEnvMode() {
+  if (Zotero.isWin) {
+    const enhancedConfig = await getEnhancedConfig()
+    if (enhancedConfig) {
+      setPref('nutstore-env-mode', 'enhanced')
+      return
+    }
+  }
+
+  setPref('nutstore-env-mode', 'sso')
 }

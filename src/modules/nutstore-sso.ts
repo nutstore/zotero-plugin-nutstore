@@ -3,11 +3,11 @@ import { getElementById, hideElement, showElement } from '../utils/dom'
 import { clearStoragePasswordInputValue, getNutstoreWebdavUrl, isNutstoreWebdav, reInitZoteroSync } from '../utils/nutstore'
 import { getPref, getPrefWin, setPref } from '../utils/prefs'
 import { getSSOMethod } from '../utils/sso'
-import { showEnhancedWebdav, hideEnhancedWebdav } from './enhanced-webdav'
+import { hideEnhancedWebdav, showEnhancedWebdav } from './enhanced-webdav'
 
 export { registerNutstoreSSOProtocol } from './protocol'
 
-export async function updateNutstorePerfs() {
+export async function updateNutstoreSSOPerfs() {
   const prefWin = getPrefWin()
   if (!prefWin)
     return
@@ -124,11 +124,6 @@ export async function forceSetNutstoreWebdavPerfs() {
   reInitZoteroSync()
 
   setPref('nutstore-webdav-force-set', true)
-  updateNutstorePerfs()
+  updateNutstoreSSOPerfs()
 }
-
-export function syncPerfObserver() {
-  updateNutstorePerfs()
-}
-
 
