@@ -72,11 +72,11 @@ export function getElementsByClassName(
  * @param win 窗口对象，默认为 Zotero 主窗口
  * @returns 找到的元素列表
  */
-export function getElementsByTagName<K extends keyof HTMLElementTagNameMap>(
-  tagName: K,
+export function getElementsByTagName(
+  tagName: string,
   parent?: Element | Document | null,
   win?: Window,
-): HTMLCollectionOf<HTMLElementTagNameMap[K]> {
+): HTMLCollectionOf<Element> {
   win ??= Zotero.getMainWindow()
   const doc = parent instanceof Element ? parent : win.document
   return doc.getElementsByTagName(tagName)
