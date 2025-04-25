@@ -74,9 +74,6 @@
       "core-js",
       "es5-ext",
       "esbuild"
-    ],
-    "overrides": {
-      "zotero-types": "link:../../../../Users/wsdehl/Library/pnpm/global/5/node_modules/zotero-types"
-    }
+    ]
   }
 }
