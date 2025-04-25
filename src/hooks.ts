@@ -1,3 +1,4 @@
+import { startupVerifyEnhancedWebdav } from './modules/enhanced-webdav'
 import { registerNutstoreSSOProtocol } from './modules/nutstore-sso'
 import { registerPerfObserver, registerPrefs, registerPrefsScripts } from './modules/preference'
 import { initLocale } from './utils/locale'
@@ -21,6 +22,8 @@ async function onStartup() {
   await Promise.all(
     Zotero.getMainWindows().map(win => onMainWindowLoad(win)),
   )
+
+  startupVerifyEnhancedWebdav()
 }
 
 async function onMainWindowLoad(win: Window): Promise<void> {

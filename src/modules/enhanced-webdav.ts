@@ -10,9 +10,7 @@ import { forceSetNutstoreWebdavPerfs } from './nutstore-sso'
 export async function updateEnhancedWebdav() {
   const win = getPrefWin()!
 
-  const enhancedWebdavConfig = await getEnhancedConfig()!
-
-  ztoolkit.log('enhancedWebdavConfig', enhancedWebdavConfig)
+  const enhancedWebdavConfig = await getEnhancedConfig()
 
   if (!enhancedWebdavConfig) {
     Zotero.alert(win, getString('enhanced-webdav-config-not-found-title'), getString('enhanced-webdav-config-not-found-message'))
@@ -91,4 +89,19 @@ export async function handleClickEnhancedWebdavServerFixButton() {
   }
 
   setEnhanceWebdav(enhancedWebdavConfig)
+}
+
+export async function startupVerifyEnhancedWebdav() {
+  const win = getPrefWin()!
+  const enhancedWebdavConfig = await getEnhancedConfig()
+
+  if (enhancedWebdavConfig) {
+    const controller = Zotero.Sync.Runner.getStorageController('webdav')
+    try {
+      await controller.checkServer()
+    }
+    catch {
+      Zotero.alert(win, getString('enhanced-webdav-server-verify-failed-title'), getString('enhanced-webdav-server-verify-failed-message'))
+    }
+  }
 }
