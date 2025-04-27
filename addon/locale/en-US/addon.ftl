@@ -16,3 +16,9 @@ enhanced-webdav-server-verify-success-message = Nutstore service verified, pleas
 
 enhanced-webdav-server-verify-failed-title = Nutstore service verification failed
 enhanced-webdav-server-verify-failed-message = Nutstore service verification failed. Please ensure: ① You are logged in to Zotero; ② The attachment sync method for "My Library" is checked; ③ The Nutstore client is running and logged in.
+
+enhanced-webdav-config-not-found-title = Enhanced WebDAV configuration not found
+enhanced-webdav-config-not-found-message = Enhanced WebDAV configuration not found, please check if the Nutstore client is running normally.
+
+enhanced-webdav-server-fix-success-title = Nutstore service fixed
+enhanced-webdav-server-fix-success-message = Nutstore service fixed, please continue to use the Nutstore client for synchronization.

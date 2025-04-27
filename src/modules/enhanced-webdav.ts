@@ -85,6 +85,8 @@ export async function handleClickEnhancedWebdavServerFixButton() {
   }
 
   setEnhanceWebdav(enhancedWebdavConfig)
+
+  Zotero.alert(win, getString('enhanced-webdav-server-fix-success-title'), getString('enhanced-webdav-server-fix-success-message'))
 }
 
 export async function startupVerifyEnhancedWebdav() {
