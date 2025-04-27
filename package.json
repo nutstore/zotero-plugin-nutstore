@@ -1,7 +1,7 @@
 {
   "name": "zotero-plugin-nutstore",
   "type": "module",
-  "version": "1.1.0-beta.3",
+  "version": "1.1.0-beta.4",
   "packageManager": "pnpm@10.9.0",
   "description": "Nutstore plugin for Zotero.",
   "config": {
