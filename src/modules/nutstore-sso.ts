@@ -21,14 +21,14 @@ export async function updateNutstoreSSOPerfs() {
       return
 
     usernameLabel.dataset.l10nArgs = JSON.stringify({ username: oauthInfo.username })
-    hideElement(`${config.addonRef}-sso-button-container`, prefWin)
-    showElement(`${config.addonRef}-authorized-container`, prefWin)
+    hideElement(`${config.addonRef}-sso-unauthorized-container`, prefWin)
+    showElement(`${config.addonRef}-sso-authorized-container`, prefWin)
 
     updateForceButtonEnabled()
   }
   else {
-    showElement(`${config.addonRef}-sso-button-container`, prefWin)
-    hideElement(`${config.addonRef}-authorized-container`, prefWin)
+    showElement(`${config.addonRef}-sso-unauthorized-container`, prefWin)
+    hideElement(`${config.addonRef}-sso-authorized-container`, prefWin)
 
     updateForceButtonEnabled()
   }
