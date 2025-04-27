@@ -74,7 +74,7 @@ declare namespace Zotero {
 
           checkServer(): _ZoteroTypes.Promise.Bluebird<void>
 
-          handleVerificationError(error: Error, window: Window, skipSuccessMessage?: boolean): _ZoteroTypes.Promise.Bluebird<boolean>
+          handleVerificationError(error: any, window: Window, skipSuccessMessage?: boolean): _ZoteroTypes.Promise.Bluebird<boolean>
 
           purgeDeletedStorageFiles(libraryID: number): _ZoteroTypes.Promise.Bluebird<DeletedStorageFileResult>
 
