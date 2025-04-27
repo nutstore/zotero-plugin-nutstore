@@ -19,4 +19,8 @@ pref-enhanced-webdav-username-label = Username: { $username }
 pref-enhanced-webdav-server-fix-button =
     .label = Fix Nutstore Service
 
-pref-disabled-storage-warning = Sync storage is not enabled, please enable sync storage first.
+pref-disabled-storage-warning = ⚠️ "File Sync" is not currently enabled, causing Nutstore to be unable to sync properly.
+pref-enabled-storage-guide = Please follow the steps below to enable file sync:
+pref-enabled-storage-guide-step-1 = Go to "Preferences" → "Sync" and log in to Zotero;
+pref-enabled-storage-guide-step-2 = Check the attachment sync method for "My Library";
+pref-enabled-storage-guide-step-3 = Restart Zotero to enable normal synchronization;

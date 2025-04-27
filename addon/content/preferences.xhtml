@@ -7,11 +7,36 @@
 </head>
 
 <groupbox onload="Zotero.__addonInstance__.hooks.onPrefsEvent('load', { window });">
-  <hbox id="__addonRef__-disabled-storage-warning-container"
-        class="hidden">
-    <p data-l10n-id="pref-disabled-storage-warning"
-       class="text-yellow-400"></p>
-  </hbox>
+  <groupbox id="__addonRef__-disabled-storage-warning-groupbox">
+    <hbox id="__addonRef__-disabled-storage-warning-container"
+          class="mb-4">
+      <p data-l10n-id="pref-disabled-storage-warning"
+         class="py-1 px-2 rounded-full bg-primary ">
+      </p>
+    </hbox>
+    <vbox>
+      <html:h3 data-l10n-id="pref-enabled-storage-guide"
+               class="mb-4"></html:h3>
+      <vbox>
+        <html:ol class="text-gray-500 ps-5 space-y-2 my-2">
+          <html:li>
+            <html:span data-l10n-id="pref-enabled-storage-guide-step-1"></html:span>
+          </html:li>
+          <html:li>
+            <html:span data-l10n-id="pref-enabled-storage-guide-step-2"></html:span>
+          </html:li>
+          <html:li>
+            <html:span data-l10n-id="pref-enabled-storage-guide-step-3"></html:span>
+          </html:li>
+        </html:ol>
+      </vbox>
+      <vbox>
+        <image src="chrome://__addonRef__/content/images/nutstore_zotero_sync_pic@2x.png"
+               alt="nutstore-sync-guide"
+               class="w-[360px] h-[328px]" />
+      </vbox>
+    </vbox>
+  </groupbox>
 
 
   <groupbox id="__addonRef__-sso-groupbox"

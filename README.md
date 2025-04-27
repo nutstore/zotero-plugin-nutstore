@@ -16,7 +16,6 @@ This is a Zotero plugin for Nutstore.
 
 - Download the plugin (.xpi file) from below.
 
-  - [Latest Version: 1.0.6](https://github.com/nutstore/zotero-plugin-nutstore/releases/download/v1.0.6/zotero-plugin-nutstore.xpi)
   - [Latest Stable](https://github.com/nutstore/zotero-plugin-nutstore/releases/latest)
   - [All Releases](https://github.com/nutstore/zotero-plugin-nutstore/releases)
 
@@ -27,6 +26,19 @@ This is a Zotero plugin for Nutstore.
 - Select `Install Add-on from file`.
 - Browse to where you downloaded the `.xpi` file and select it.
 - Finish!
+
+## 📖 User Manual
+
+### 1. Login to Nutstore to help you configure Zotero Sync
+
+- Click the login button in the plugin perference panel.
+- In the popped-up web page, log in to Nutstore account.
+- Then click `open Zotero` on the web page.
+- Done! Now your Zotero will use Nutstore service for file synchronization.
+
+### 2. Enhanced Webdav
+
+> Note: This feature is only available for `Windows` now.
 
 ## 🛠️ Development
 

@@ -7,3 +7,7 @@
 @source "./modules";
 
 @plugin "@iconify/tailwind4";
+
+@theme {
+  --color-primary: hsla(212, 100%, 66%, 0.16)
+}

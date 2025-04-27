@@ -33,7 +33,7 @@ function showDisabledStorageWarning() {
   const prefWin = getPrefWin()
   if (!prefWin)
     return
-  showElement(`${config.addonRef}-disabled-storage-warning-container`, prefWin)
+  showElement(`${config.addonRef}-disabled-storage-warning-groupbox`, prefWin)
   hideElement(`${config.addonRef}-sso-groupbox`, prefWin)
   hideElement(`${config.addonRef}-enhanced-webdav-groupbox`, prefWin)
 }
@@ -42,7 +42,7 @@ function hideDisabledStorageWarning() {
   const prefWin = getPrefWin()
   if (!prefWin)
     return
-  hideElement(`${config.addonRef}-disabled-storage-warning-container`, prefWin)
+  hideElement(`${config.addonRef}-disabled-storage-warning-groupbox`, prefWin)
 }
 
 function showNutstoreSSOWebdav() {
