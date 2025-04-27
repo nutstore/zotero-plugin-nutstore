@@ -5,6 +5,8 @@ pref-sso-login-button =
 pref-sso-logout-button =
     .label = Logout
 pref-sso-unauthorized-warning = 💡 Please login to Nutstore before syncing.
+pref-sso-authorized-tip = 📌 After logging in to Nutstore, you still need to log in to Zotero to synchronize normally.
+pref-enhanced-webdav-authorized-tip = 📌 This feature requires the Nutstore client to be installed and logged in. 
 pref-sso-username-label = Username: { $username }
 pref-force-fix-nutstore-webdav-button =
     .label = Force Fix
@@ -12,7 +14,6 @@ pref-current-nutstore-webdav-success = Current webdav configuration is correct �
 pref-current-nutstore-webdav-error = Current webdav configuration is incorrect 🚫
 
 pref-enhanced-webdav-title = Enhanced WebDAV
-pref-enhanced-webdav-description = This feature requires the Nutstore client to be installed and logged in.
 pref-enhanced-webdav-server-verify-button =
     .label = Verify Nutstore Service
 pref-enhanced-webdav-username-label = Username: { $username }

@@ -54,8 +54,8 @@
       </hbox>
     </groupbox>
     <groupbox id="__addonRef__-sso-authorized-container">
-      <hbox id="__addonRef__-sso-unauthorized-warning-container">
-        <p data-l10n-id="pref-sso-unauthorized-warning"
+      <hbox id="__addonRef__-sso-authorized-tip-container">
+        <p data-l10n-id="pref-sso-authorized-tip"
            class="py-1 px-2 rounded-full bg-primary ">
         </p>
       </hbox>
@@ -105,15 +105,22 @@
 
   <groupbox id="__addonRef__-enhanced-webdav-groupbox"
             class="hidden">
+    <hbox id="__addonRef__-enhanced-webdav-authorized-tip-container">
+      <p data-l10n-id="pref-enhanced-webdav-authorized-tip"
+         class="py-1 px-2 rounded-full bg-primary ">
+      </p>
+    </hbox>
     <label>
-      <html:div data-l10n-id="pref-enhanced-webdav-title"
-                class="my-1 font-semibold text-[14px]"></html:div>
+      <html:div data-l10n-id="pref-sso-title"
+                class="mt-6 font-semibold text-[14px]"></html:div>
     </label>
     <vbox id="__addonRef__-enhanced-webdav-container">
-      <hbox class="flex gap-1 mt-1 items-center">
+      <hbox class="flex gap-1 mt-4 items-center text-gray-600">
         <label id="__addonRef__-enhanced-webdav-username"
                data-l10n-id="pref-enhanced-webdav-username-label"
                data-l10n-args="{ 'username': 'username' }"></label>
+      </hbox>
+      <hbox class="flex gap-1 mt-5 items-center">
         <button id="__addonRef__-enhanced-webdav-server-verify-button"
                 data-l10n-id="pref-enhanced-webdav-server-verify-button"></button>
         <button id="__addonRef__-enhanced-webdav-server-fix-button"

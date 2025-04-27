@@ -67,7 +67,12 @@ export function restoreWebdavConfig() {
 }
 
 export async function handleClickEnhancedWebdavServerVerifyButton() {
-  await startupVerifyEnhancedWebdav()
+  const win = getPrefWin()!
+
+  const success = await startupVerifyEnhancedWebdav()
+  if (success) {
+    Zotero.alert(win, getString('enhanced-webdav-server-verify-success-title'), getString('enhanced-webdav-server-verify-success-message'))
+  }
 }
 
 export async function handleClickEnhancedWebdavServerFixButton() {
@@ -93,13 +98,10 @@ export async function startupVerifyEnhancedWebdav() {
       await controller.checkServer()
       success = true
     }
-    catch (e: unknown) {
-      ztoolkit.log('enhanced-webdav-server-verify-failed', e)
-      success = await controller.handleVerificationError(e, win)
+    catch {
+      Zotero.alert(win, getString('enhanced-webdav-server-verify-failed-title'), getString('enhanced-webdav-server-verify-failed-message'))
     }
   }
 
-  if (!success) {
-    Zotero.alert(win, getString('enhanced-webdav-server-verify-failed-title'), getString('enhanced-webdav-server-verify-failed-message'))
-  }
+  return success
 }

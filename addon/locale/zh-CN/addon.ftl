@@ -15,4 +15,4 @@ enhanced-webdav-server-verify-success-title = 坚果云服务验证成功
 enhanced-webdav-server-verify-success-message = 坚果云服务验证成功，请继续使用坚果云客户端进行同步。
 
 enhanced-webdav-server-verify-failed-title = 坚果云服务验证失败
-enhanced-webdav-server-verify-failed-message = 坚果云服务验证失败，请检查坚果云客户端是否正常运行和 Zotero 同步设置。
+enhanced-webdav-server-verify-failed-message = 坚果云服务验证失败。请确保：① 您已登录 Zotero；② 已勾选“我的文库”附件同步方式；③ 坚果云客户端正在运行并已登录。

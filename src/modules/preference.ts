@@ -115,5 +115,5 @@ async function initNutstoreEnvMode() {
     }
   }
 
-  setPref('nutstore-env-mode', 'sso')
+  setPref('nutstore-env-mode', 'enhanced')
 }
