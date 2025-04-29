@@ -111,19 +111,12 @@
   .ps-5 {
     padding-inline-start: calc(var(--spacing) * 5);
   }
-  .text-xs {
-    font-size: var(--text-xs);
-    line-height: var(--tw-leading, var(--text-xs--line-height));
-  }
   .text-\[14px\] {
     font-size: 14px;
   }
   .font-semibold {
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
-  }
-  .text-gray-400 {
-    color: var(--color-gray-400);
   }
   .text-gray-500 {
     color: var(--color-gray-500);

@@ -5,6 +5,7 @@ import { getEnhancedConfig } from '../utils/enhanced-config'
 import { getString } from '../utils/locale'
 import { reInitZoteroSync } from '../utils/nutstore'
 import { getPrefWin } from '../utils/prefs'
+import { isSyncStorageEnabled } from '../utils/ztoolkit'
 import { forceSetNutstoreWebdavPerfs } from './nutstore-sso'
 
 export async function updateEnhancedWebdav() {
@@ -62,6 +63,17 @@ export function setEnhanceWebdav(config: EnhancedWebdavConfig) {
   reInitZoteroSync()
 }
 
+export function ensureEnhancedWebdav(config: EnhancedWebdavConfig) {
+  const currentProtocol = Zotero.Prefs.get('sync.storage.protocol')
+  const currentScheme = Zotero.Prefs.get('sync.storage.scheme')
+  const currentUsername = Zotero.Prefs.get('sync.storage.username')
+  const currentUrl = Zotero.Prefs.get('sync.storage.url')
+
+  if (currentProtocol !== config.WebDavServer.Scheme || currentScheme !== config.WebDavServer.Scheme || currentUsername !== config.WebDavServer.Credentials.Username || currentUrl !== config.WebDavServer.Url) {
+    setEnhanceWebdav(config)
+  }
+}
+
 export function restoreWebdavConfig() {
   forceSetNutstoreWebdavPerfs()
 }
@@ -87,14 +99,21 @@ export async function handleClickEnhancedWebdavServerFixButton() {
   setEnhanceWebdav(enhancedWebdavConfig)
 
   Zotero.alert(win, getString('enhanced-webdav-server-fix-success-title'), getString('enhanced-webdav-server-fix-success-message'))
+
+  updateEnhancedWebdav()
 }
 
 export async function startupVerifyEnhancedWebdav() {
+  const syncEnabled = await isSyncStorageEnabled()
+  if (!syncEnabled)
+    return
+
   const win = getPrefWin()!
   const enhancedWebdavConfig = await getEnhancedConfig()
 
   let success = false
   if (enhancedWebdavConfig) {
+    ensureEnhancedWebdav(enhancedWebdavConfig)
     const controller = Zotero.Sync.Runner.getStorageController('webdav')
     try {
       await controller.checkServer()
