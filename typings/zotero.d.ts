@@ -72,7 +72,7 @@ declare namespace Zotero {
 
           uploadFile(request: Zotero.Sync.Storage.Request): _ZoteroTypes.Promise.Bluebird<Zotero.Sync.Storage.Result>
 
-          checkServer(): _ZoteroTypes.Promise.Bluebird<void>
+          checkServer(opts: { onRequest?: (request: XMLHttpRequest) => void }): _ZoteroTypes.Promise.Bluebird<void>
 
           handleVerificationError(error: any, window: Window, skipSuccessMessage?: boolean): _ZoteroTypes.Promise.Bluebird<boolean>
 

@@ -80,10 +80,36 @@ export function restoreWebdavConfig() {
 
 export async function handleClickEnhancedWebdavServerVerifyButton() {
   const win = getPrefWin()!
+  const verifyButton = getElementById(`${config.addonRef}-enhanced-webdav-server-verify-button`, win)!
+  const abortButton = getElementById(`${config.addonRef}-enhanced-webdav-server-verify-abort-button`, win)!
+  let request: XMLHttpRequest | null = null
 
-  const success = await startupVerifyEnhancedWebdav()
-  if (success) {
-    Zotero.alert(win, getString('enhanced-webdav-server-verify-success-title'), getString('enhanced-webdav-server-verify-success-message'))
+  try {
+    hideElement(verifyButton, win)
+    showElement(abortButton, win)
+    const success = await startupVerifyEnhancedWebdav((r) => {
+      request = r
+    })
+
+    abortButton.onclick = () => {
+      if (request) {
+        request.onreadystatechange = null
+        request.abort()
+      }
+      hideElement(abortButton, win)
+      showElement(verifyButton, win)
+    }
+
+    if (success) {
+      Zotero.alert(win, getString('enhanced-webdav-server-verify-success-title'), getString('enhanced-webdav-server-verify-success-message'))
+    }
+  }
+  catch {
+
+  }
+  finally {
+    hideElement(abortButton, win)
+    showElement(verifyButton, win)
   }
 }
 
@@ -103,7 +129,8 @@ export async function handleClickEnhancedWebdavServerFixButton() {
   updateEnhancedWebdav()
 }
 
-export async function startupVerifyEnhancedWebdav() {
+export async function startupVerifyEnhancedWebdav(onRequest?: (request: XMLHttpRequest) => void) {
+  onRequest = onRequest || (() => { })
   const syncEnabled = await isSyncStorageEnabled()
   if (!syncEnabled)
     return
@@ -116,7 +143,9 @@ export async function startupVerifyEnhancedWebdav() {
     ensureEnhancedWebdav(enhancedWebdavConfig)
     const controller = Zotero.Sync.Runner.getStorageController('webdav')
     try {
-      await controller.checkServer()
+      await controller.checkServer({
+        onRequest,
+      })
       success = true
     }
     catch {

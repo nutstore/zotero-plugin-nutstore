@@ -15,12 +15,9 @@
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
-    --color-gray-400: oklch(70.7% 0.022 261.325);
     --color-gray-500: oklch(55.1% 0.027 264.364);
     --color-gray-600: oklch(44.6% 0.03 256.802);
     --spacing: 0.25rem;
-    --text-xs: 0.75rem;
-    --text-xs--line-height: calc(1 / 0.75);
     --font-weight-semibold: 600;
     --color-primary: hsla(212, 100%, 66%, 0.16);
   }
