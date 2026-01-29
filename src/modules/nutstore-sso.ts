@@ -56,7 +56,7 @@ async function updateForceButtonEnabled() {
   }
 
   const currentUsername = Zotero.Prefs.get('sync.storage.username')
-  const currentPassword = Zotero.Sync.Runner.getStorageController('webdav').password
+  const currentPassword = await Zotero.Sync.Runner.getStorageController('webdav').getPassword()
 
   if (currentUsername !== oauthInfo.username || currentPassword !== oauthInfo.access_token) {
     toggleForceFixNutstoreWebdavButton('enabled')
@@ -99,7 +99,7 @@ export async function clearNutstoreWebdavPerfs() {
 
   Zotero.Prefs.set('sync.storage.username', '')
   Zotero.Prefs.set('sync.storage.url', '')
-  Zotero.Sync.Runner.getStorageController('webdav').password = ''
+  await Zotero.Sync.Runner.getStorageController('webdav').setPassword('')
 
   clearStoragePasswordInputValue()
 }
@@ -117,7 +117,7 @@ export async function forceSetNutstoreWebdavPerfs() {
   Zotero.Prefs.set('sync.storage.scheme', 'https')
   Zotero.Prefs.set('sync.storage.username', oauthInfo.username)
   Zotero.Prefs.set('sync.storage.url', getNutstoreWebdavUrl())
-  Zotero.Sync.Runner.getStorageController('webdav').password = oauthInfo.access_token
+  await Zotero.Sync.Runner.getStorageController('webdav').setPassword(oauthInfo.access_token)
 
   reInitZoteroSync()
 

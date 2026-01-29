@@ -24,7 +24,7 @@ export async function updateEnhancedWebdav() {
     usernameLabel.dataset.l10nArgs = JSON.stringify({ username: enhancedWebdavConfig.WebDavServer.Credentials.Username })
   }
 
-  setEnhanceWebdav(enhancedWebdavConfig)
+  await setEnhanceWebdav(enhancedWebdavConfig)
   hideNutstoreSSOWebdav()
 }
 
@@ -52,13 +52,13 @@ export function showNutstoreSSOWebdav() {
   showElement(`${config.addonRef}-nutstore-webdav-setting-container`, prefWin)
 }
 
-export function setEnhanceWebdav(config: EnhancedWebdavConfig) {
+export async function setEnhanceWebdav(config: EnhancedWebdavConfig) {
   Zotero.Prefs.set('sync.storage.protocol', 'webdav')
   Zotero.Prefs.set('sync.storage.scheme', config.WebDavServer.Scheme)
   Zotero.Prefs.set('sync.storage.username', config.WebDavServer.Credentials.Username)
   Zotero.Prefs.set('sync.storage.url', config.WebDavServer.Url)
 
-  Zotero.Sync.Runner.getStorageController('webdav').password = config.WebDavServer.Credentials.Password
+  await Zotero.Sync.Runner.getStorageController('webdav').setPassword(config.WebDavServer.Credentials.Password)
 
   reInitZoteroSync()
 }
@@ -122,7 +122,7 @@ export async function handleClickEnhancedWebdavServerFixButton() {
     return
   }
 
-  setEnhanceWebdav(enhancedWebdavConfig)
+  await setEnhanceWebdav(enhancedWebdavConfig)
 
   Zotero.alert(win, getString('enhanced-webdav-server-fix-success-title'), getString('enhanced-webdav-server-fix-success-message'))
 
