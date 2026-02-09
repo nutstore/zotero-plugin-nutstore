@@ -23,10 +23,14 @@ async function onStartup() {
     Zotero.getMainWindows().map(win => onMainWindowLoad(win)),
   )
 
+  // Mark initialized as true to confirm plugin loading status
+  // outside of the plugin (e.g. scaffold testing process)
+  addon.data.initialized = true
+
   startupVerifyEnhancedWebdav()
 }
 
-async function onMainWindowLoad(win: Window): Promise<void> {
+async function onMainWindowLoad(win: _ZoteroTypes.MainWindow): Promise<void> {
   // Create ztoolkit for every window
   addon.data.ztoolkit = createZToolkit()
 
@@ -36,7 +40,7 @@ async function onMainWindowLoad(win: Window): Promise<void> {
   )
 }
 
-async function onMainWindowUnload(win: Window): Promise<void> {
+async function onMainWindowUnload(win: _ZoteroTypes.MainWindow): Promise<void> {
   ztoolkit.log('onMainWindowUnload', win)
   ztoolkit.unregisterAll()
   addon.data.dialog?.window?.close()
@@ -47,7 +51,7 @@ function onShutdown(): void {
   addon.data.dialog?.window?.close()
   // Remove addon object
   addon.data.alive = false
-  // @ts-ignore - Plugin instance is not typed
+  // @ts-expect-error - Plugin instance is not typed
   delete Zotero[addon.data.config.addonInstance]
 }
 

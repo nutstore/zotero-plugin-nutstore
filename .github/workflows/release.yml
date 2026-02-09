@@ -1,5 +1,4 @@
 name: Release
-
 on:
   push:
     tags:
@@ -9,49 +8,17 @@ permissions:
   contents: write
   issues: write
   pull-requests: write
+  packages: read
+
+env:
+  # Used by .npmrc to access GitHub Packages (@nutstore scope)
+  NUTSTORE_PAT: ${{ github.repository == 'nutstore/zotero-plugin-nutstore' && secrets.GITHUB_TOKEN || secrets.NUTSTORE_PAT }}
+  NODE_AUTH_TOKEN: ${{ github.repository == 'nutstore/zotero-plugin-nutstore' && secrets.GITHUB_TOKEN || secrets.NUTSTORE_PAT }}
+
 jobs:
-  release:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-      packages: read
-    env:
-      GITHUB_TOKEN: ${{ secrets.GitHub_TOKEN }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Install deps
-        env:
-          NUTSTORE_PAT: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm install
-
-      - name: Build
-        run: |
-          pnpm run build
-
-      - name: Release to GitHub
-        run: |
-          pnpm run release
-          sleep 1s
-
-      - name: Notify release
-        uses: apexskier/github-release-commenter@v1
-        continue-on-error: true
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          comment-template: |
-            :rocket: _This ticket has been resolved in {release_tag}. See {release_link} for release notes._
+  create-release:
+    uses: zotero-plugin-dev/workflows/.github/workflows/release-plugin.yml@main
+    with:
+      build: pnpm run build
+      release: pnpm run release
+    secrets: inherit

@@ -6,6 +6,9 @@ node_modules
 yarn.lock
 package-lock.json
 
+# TSC
+tsconfig.tsbuildinfo
+
 # Scaffold
 .env
 .scaffold

@@ -56,9 +56,13 @@ declare namespace Zotero {
 
           get username(): string
 
+          // Zotero 7: Uses synchronous property
           get password(): string
-
           set password(password: string): void
+
+          // Zotero 8: Uses async method
+          getPassword?(): Promise<string>
+          setPassword?(password: string): Promise<void>
 
           get rootURI(): nsIURI | never
           get parentURI(): nsIURI | never

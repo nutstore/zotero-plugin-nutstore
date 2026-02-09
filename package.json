@@ -29,15 +29,14 @@
     "lint:check": "eslint .",
     "lint:fix": "eslint . --fix",
     "release": "zotero-plugin release",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "zotero-plugin test",
     "update-deps": "npm update --save"
   },
   "dependencies": {
-    "@nutstore/sso-js": "^0.0.4",
+    "@nutstore/sso-js": "^0.0.8",
     "@nutstore/sso-wasm": "^0.0.2",
     "bluebird": "^3.7.2",
-    "zotero-plugin-toolkit": "^5.0.0-1",
-    "zotero-types": "^4.0.0-beta.8"
+    "zotero-plugin-toolkit": "^5.1.0-beta.13"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.11.0",
@@ -45,12 +44,17 @@
     "@iconify/json": "^2.2.321",
     "@iconify/tailwind4": "^1.0.6",
     "@tailwindcss/cli": "^4.0.17",
+    "@types/chai": "^5.2.3",
+    "@types/mocha": "^10.0.10",
     "@types/node": "^22.13.10",
+    "chai": "^6.2.1",
     "eslint": "^9.22.0",
+    "mocha": "^11.7.5",
     "tailwindcss": "^4.0.17",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.26.1",
-    "zotero-plugin-scaffold": "^0.5.0"
+    "zotero-plugin-scaffold": "^0.8.2",
+    "zotero-types": "^4.1.0-beta.4"
   },
   "prettier": {
     "printWidth": 80,

@@ -11,7 +11,7 @@
  */
 export function getElementById(id: string, win?: Window): HTMLElement | null {
   win ??= Zotero.getMainWindow()
-  return win.document.getElementById(id)
+  return win.document.getElementById(id) as HTMLElement | null
 }
 
 /**
@@ -170,7 +170,7 @@ export function closest<T extends Element = HTMLElement>(
   win?: Window,
 ): T | null {
   win ??= Zotero.getMainWindow()
-  return element.closest<T>(selector)
+  return element.closest(selector) as T | null
 }
 
 /**

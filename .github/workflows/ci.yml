@@ -2,79 +2,81 @@ name: CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+
+env:
+  # Used by .npmrc to access GitHub Packages (@nutstore scope)
+  NUTSTORE_PAT: ${{ github.repository == 'nutstore/zotero-plugin-nutstore' && secrets.GITHUB_TOKEN || secrets.NUTSTORE_PAT }}
+  NODE_AUTH_TOKEN: ${{ github.repository == 'nutstore/zotero-plugin-nutstore' && secrets.GITHUB_TOKEN || secrets.NUTSTORE_PAT }}
 
 jobs:
   lint:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      packages: read
-    env:
-      GITHUB_TOKEN: ${{ secrets.GitHub_TOKEN }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup JS
+        uses: zotero-plugin-dev/workflows/setup-js@main
         with:
           node-version: 20
+          fetch-all: true
+          package-manager: pnpm
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Install deps
-        env:
-          NUTSTORE_PAT: ${{ secrets.GitHub_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Ensure pnpm version (from packageManager)
         run: |
-          pnpm install
+          corepack enable
+          corepack prepare pnpm@10.9.0 --activate
+          pnpm -v
 
       - name: Run Lint
-        run: |
-          pnpm run lint:check
+        run: pnpm run lint:check
 
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      packages: read
-    env:
-      GITHUB_TOKEN: ${{ secrets.GitHub_TOKEN }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup JS
+        uses: zotero-plugin-dev/workflows/setup-js@main
         with:
           node-version: 20
+          fetch-all: true
+          package-manager: pnpm
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Install deps
-        env:
-          NUTSTORE_PAT: ${{ secrets.GitHub_TOKEN }}
+      - name: Ensure pnpm version (from packageManager)
         run: |
-          pnpm install
+          corepack enable
+          corepack prepare pnpm@10.9.0 --activate
+          pnpm -v
 
       - name: Run Build
-        run: |
-          pnpm run build
+        run: pnpm run build
 
       - name: Upload build result
         uses: actions/upload-artifact@v4
         with:
           name: build-result
-          path: |
-            build
+          path: .scaffold/build
+
+  test:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Setup JS
+        uses: zotero-plugin-dev/workflows/setup-js@main
+        with:
+          node-version: 20
+          fetch-all: true
+          package-manager: pnpm
+
+      - name: Ensure pnpm version (from packageManager)
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.9.0 --activate
+          pnpm -v
+
+      - name: Run Test
+        run: pnpm run test

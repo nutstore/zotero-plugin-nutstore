@@ -8,9 +8,7 @@ export default defineConfig({
   name: pkg.config.addonName,
   id: pkg.config.addonID,
   namespace: pkg.config.addonRef,
-  updateURL: `https://github.com/{{owner}}/{{repo}}/releases/download/release/${
-    pkg.version.includes('-') ? 'update-beta.json' : 'update.json'
-  }`,
+  updateURL: `https://github.com/{{owner}}/{{repo}}/releases/download/release/${pkg.version.includes('-') ? 'update-beta.json' : 'update.json'}`,
   xpiDownloadLink:
     'https://github.com/{{owner}}/{{repo}}/releases/download/v{{version}}/{{xpiName}}.xpi',
 
@@ -38,6 +36,10 @@ export default defineConfig({
         outfile: `.scaffold/build/addon/content/scripts/${pkg.config.addonRef}.js`,
       },
     ],
+  },
+
+  test: {
+    waitForPlugin: `() => Zotero.${pkg.config.addonInstance}.data.initialized`,
   },
 
   // If you need to see a more detailed log, uncomment the following line:

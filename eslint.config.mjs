@@ -45,6 +45,7 @@ export default antfu(
       'no-console': 'error',
       'eqeqeq': ['error', 'always', { null: 'ignore' }],
       'unused-imports/no-unused-imports': 'error',
+      'style/eol-last': 'off',
     },
   },
 )

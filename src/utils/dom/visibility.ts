@@ -12,7 +12,7 @@ import { addClass, removeClass } from './class-names'
  */
 export function hideElement(element: HTMLElement | string, win?: Window): HTMLElement {
   win ??= Zotero.getMainWindow()
-  const el = typeof element === 'string' ? win.document.getElementById(element) : element
+  const el = (typeof element === 'string' ? win.document.getElementById(element) : element) as HTMLElement
 
   if (!el) {
     throw new Error(`Element ${typeof element === 'string' ? element : 'provided'} not found`)
@@ -30,7 +30,7 @@ export function hideElement(element: HTMLElement | string, win?: Window): HTMLEl
  */
 export function showElement(element: HTMLElement | string, win?: Window): HTMLElement {
   win ??= Zotero.getMainWindow()
-  const el = typeof element === 'string' ? win.document.getElementById(element) : element
+  const el = (typeof element === 'string' ? win.document.getElementById(element) : element) as HTMLElement
 
   if (!el) {
     throw new Error(`Element ${typeof element === 'string' ? element : 'provided'} not found`)
@@ -48,7 +48,7 @@ export function showElement(element: HTMLElement | string, win?: Window): HTMLEl
  */
 export function toggleElement(element: HTMLElement | string, win?: Window): HTMLElement {
   win ??= Zotero.getMainWindow()
-  const el = typeof element === 'string' ? win.document.getElementById(element) : element
+  const el = (typeof element === 'string' ? win.document.getElementById(element) : element) as HTMLElement
 
   if (!el) {
     throw new Error(`Element ${typeof element === 'string' ? element : 'provided'} not found`)
@@ -108,7 +108,7 @@ export function setElementsVisibility(elements: (HTMLElement | string)[], condit
  */
 export function isElementVisible(element: HTMLElement | string, win?: Window): boolean {
   win ??= Zotero.getMainWindow()
-  const el = typeof element === 'string' ? win.document.getElementById(element) : element
+  const el = (typeof element === 'string' ? win.document.getElementById(element) : element) as HTMLElement
 
   if (!el) {
     throw new Error(`Element ${typeof element === 'string' ? element : 'provided'} not found`)
