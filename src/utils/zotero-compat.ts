@@ -1,5 +1,5 @@
 /**
- * Compatibility layer for Zotero 7 and 8
+ * Compatibility layer for Zotero 7/8/9
  * Handles differences in WebDAV password API between versions
  */
 
@@ -13,14 +13,14 @@ interface WebDavControllerModern {
 }
 
 /**
- * Get WebDAV password with compatibility for both Zotero 7 and 8
+ * Get WebDAV password with compatibility for Zotero 7/8/9
  * Zotero 7: Uses synchronous property controller.password
- * Zotero 8: Uses async method controller.getPassword()
+ * Zotero 8/9: Uses async method controller.getPassword()
  */
 export async function getWebdavPassword(): Promise<string> {
   const controller = Zotero.Sync.Runner.getStorageController('webdav')
 
-  // Check if Zotero 8 (has getPassword method)
+  // Check modern API (Zotero 8/9)
   if ('getPassword' in controller && typeof controller.getPassword === 'function') {
     return await (controller as WebDavControllerModern).getPassword()
   }
@@ -30,14 +30,14 @@ export async function getWebdavPassword(): Promise<string> {
 }
 
 /**
- * Set WebDAV password with compatibility for both Zotero 7 and 8
+ * Set WebDAV password with compatibility for Zotero 7/8/9
  * Zotero 7: Uses synchronous property controller.password = value
- * Zotero 8: Uses async method controller.setPassword(value)
+ * Zotero 8/9: Uses async method controller.setPassword(value)
  */
 export async function setWebdavPassword(password: string): Promise<void> {
   const controller = Zotero.Sync.Runner.getStorageController('webdav')
 
-  // Check if Zotero 8 (has setPassword method)
+  // Check modern API (Zotero 8/9)
   if ('setPassword' in controller && typeof controller.setPassword === 'function') {
     await (controller as WebDavControllerModern).setPassword(password)
   }
