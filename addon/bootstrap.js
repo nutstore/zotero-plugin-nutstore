@@ -55,4 +55,24 @@ async function shutdown({ id, version, resourceURI, rootURI }, reason) {
   }
 }
 
-async function uninstall(data, reason) { }
+function uninstall(data, reason) {
+  // Preserve the WebDAV settings managed by Zotero itself, but remove the
+  // plugin's own authorization and state when the user explicitly uninstalls.
+  if (reason !== ADDON_UNINSTALL) {
+    return;
+  }
+
+  const prefsPrefix = "extensions.zotero.zotero-plugin-nutstore";
+  const pluginPrefs = [
+    "nutstore-sso-token",
+    "nutstore-webdav-force-set",
+    "nutstore-env-mode",
+  ];
+
+  for (const key of pluginPrefs) {
+    const pref = `${prefsPrefix}.${key}`;
+    if (Services.prefs.prefHasUserValue(pref)) {
+      Services.prefs.clearUserPref(pref);
+    }
+  }
+}
