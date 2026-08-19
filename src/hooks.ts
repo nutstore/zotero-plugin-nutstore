@@ -1,5 +1,5 @@
 import { startupVerifyEnhancedWebdav } from './modules/enhanced-webdav'
-import { registerNutstoreSSOProtocol } from './modules/nutstore-sso'
+import { registerNutstoreSSOProtocol, unregisterNutstoreSSOProtocol } from './modules/nutstore-sso'
 import { registerPerfObserver, registerPrefs, registerPrefsScripts } from './modules/preference'
 import { initLocale } from './utils/locale'
 import { createZToolkit } from './utils/ztoolkit'
@@ -47,6 +47,7 @@ async function onMainWindowUnload(win: _ZoteroTypes.MainWindow): Promise<void> {
 }
 
 function onShutdown(): void {
+  unregisterNutstoreSSOProtocol()
   ztoolkit.unregisterAll()
   addon.data.dialog?.window?.close()
   // Remove addon object
