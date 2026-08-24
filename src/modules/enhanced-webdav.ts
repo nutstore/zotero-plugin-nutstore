@@ -5,7 +5,7 @@ import { getEnhancedConfig } from '../utils/enhanced-config'
 import { getString } from '../utils/locale'
 import { reInitZoteroSync } from '../utils/nutstore'
 import { getPrefWin } from '../utils/prefs'
-import { setWebdavPassword } from '../utils/zotero-compat'
+import { prepareWebdavConfigurationChange, setWebdavPassword } from '../utils/zotero-compat'
 import { isSyncStorageEnabled } from '../utils/ztoolkit'
 import { forceSetNutstoreWebdavPerfs } from './nutstore-sso'
 
@@ -54,14 +54,15 @@ export function showNutstoreSSOWebdav() {
 }
 
 export async function setEnhanceWebdav(config: EnhancedWebdavConfig) {
+  prepareWebdavConfigurationChange()
+
   Zotero.Prefs.set('sync.storage.protocol', 'webdav')
   Zotero.Prefs.set('sync.storage.scheme', config.WebDavServer.Scheme)
   Zotero.Prefs.set('sync.storage.username', config.WebDavServer.Credentials.Username)
   Zotero.Prefs.set('sync.storage.url', config.WebDavServer.Url)
 
   await setWebdavPassword(config.WebDavServer.Credentials.Password)
-
-  reInitZoteroSync()
+  await reInitZoteroSync()
 }
 
 export async function ensureEnhancedWebdav(config: EnhancedWebdavConfig) {

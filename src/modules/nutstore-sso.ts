@@ -3,9 +3,9 @@ import { getElementById, hideElement, showElement } from '../utils/dom'
 import { clearStoragePasswordInputValue, getNutstoreWebdavUrl, isNutstoreWebdav, reInitZoteroSync } from '../utils/nutstore'
 import { getPref, getPrefWin, setPref } from '../utils/prefs'
 import { decryptToken } from '../utils/sso'
-import { getWebdavPassword, setWebdavPassword } from '../utils/zotero-compat'
+import { getWebdavPassword, prepareWebdavConfigurationChange, setWebdavPassword } from '../utils/zotero-compat'
 
-export { registerNutstoreSSOProtocol } from './protocol'
+export { registerNutstoreSSOProtocol, unregisterNutstoreSSOProtocol } from './protocol'
 
 export async function updateNutstoreSSOPerfs() {
   const prefWin = getPrefWin()
@@ -98,6 +98,8 @@ export async function clearNutstoreWebdavPerfs() {
   if (!isNutstoreWebdav())
     return
 
+  prepareWebdavConfigurationChange()
+
   Zotero.Prefs.set('sync.storage.username', '')
   Zotero.Prefs.set('sync.storage.url', '')
   await setWebdavPassword('')
@@ -113,14 +115,15 @@ export async function forceSetNutstoreWebdavPerfs() {
   if (!oauthInfo)
     return
 
+  prepareWebdavConfigurationChange()
+
   Zotero.Prefs.set('sync.storage.enabled', true)
   Zotero.Prefs.set('sync.storage.protocol', 'webdav')
   Zotero.Prefs.set('sync.storage.scheme', 'https')
   Zotero.Prefs.set('sync.storage.username', oauthInfo.username)
   Zotero.Prefs.set('sync.storage.url', getNutstoreWebdavUrl())
   await setWebdavPassword(oauthInfo.access_token)
-
-  reInitZoteroSync()
+  await reInitZoteroSync()
 
   setPref('nutstore-webdav-force-set', true)
   updateNutstoreSSOPerfs()

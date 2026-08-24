@@ -1,7 +1,7 @@
 import type { ProtocolExtension } from '../utils/protocol'
 import { getString } from '../utils/locale'
 import { setPref } from '../utils/prefs'
-import { registerCustomProtocolPath } from '../utils/protocol'
+import { registerCustomProtocolPath, unregisterCustomProtocolPath } from '../utils/protocol'
 import { decryptToken } from '../utils/sso'
 import { forceSetNutstoreWebdavPerfs, updateNutstoreSSOPerfs } from './nutstore-sso'
 
@@ -20,8 +20,27 @@ class SSOProtocol implements ProtocolExtension {
   }
 }
 
+let registeredSSOProtocol: SSOProtocol | undefined
+
 export function registerNutstoreSSOProtocol() {
-  registerCustomProtocolPath('nutstore-sync', new SSOProtocol())
+  if (registeredSSOProtocol)
+    return
+
+  const protocol = new SSOProtocol()
+  if (registerCustomProtocolPath('nutstore-sync', protocol)) {
+    registeredSSOProtocol = protocol
+  }
+  else {
+    ztoolkit.log('[Nutstore SSO] unable to register zotero://nutstore-sync protocol handler')
+  }
+}
+
+export function unregisterNutstoreSSOProtocol() {
+  if (!registeredSSOProtocol)
+    return
+
+  unregisterCustomProtocolPath('nutstore-sync', registeredSSOProtocol)
+  registeredSSOProtocol = undefined
 }
 
 async function onNutstoreSSOProtocolCall(token: string) {

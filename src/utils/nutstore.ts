@@ -1,5 +1,6 @@
 import { getElement } from './dom'
 import { getPrefWin } from './prefs'
+import { getWebdavPassword } from './zotero-compat'
 
 export function getNutstoreWebdavUrl() {
   return addon.data.env === 'development' ? 'dav-demo.jianguoyun.com/dav' : 'dav.jianguoyun.com/dav'
@@ -14,21 +15,33 @@ export function isNutstoreWebdav() {
   return currentSyncEnabled && currentSyncProtocol === 'webdav' && currentSyncScheme === 'https' && currentSyncUrl === getNutstoreWebdavUrl()
 }
 
-export function reInitZoteroSync() {
+/**
+ * Refresh the native storage settings UI after a plugin-driven configuration
+ * change without rerunning Zotero 10's heavier Account-pane initialization.
+ */
+export async function reInitZoteroSync() {
   const win = getPrefWin()
-  if (!win)
+  const sync = win?.Zotero_Preferences?.Sync
+  if (!win || !sync)
     return
 
-  if (win.Zotero_Preferences.Sync) {
-    win.Zotero_Preferences.Sync.init()
+  if (Number.parseInt(Zotero.version, 10) >= 10) {
+    await sync.updateStorageSettingsUI?.()
+    const passwordInput = getElement('#storage-password', win.document) as HTMLInputElement
+    if (passwordInput)
+      passwordInput.value = await getWebdavPassword()
+    sync.storeLastStorageSettings?.()
+    return
   }
+
+  await sync.init?.()
 }
 
 export function clearStoragePasswordInputValue() {
   const win = getPrefWin()
   if (!win)
     return
-  const passwordInput = getElement(`vbox#zotero-prefpane-sync input#storage-password`, win.document) as HTMLInputElement
+  const passwordInput = getElement('#storage-password', win.document) as HTMLInputElement
 
   if (passwordInput) {
     passwordInput.value = ''
