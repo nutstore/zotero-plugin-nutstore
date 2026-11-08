@@ -2,6 +2,10 @@ const ZOTERO_SCHEME = 'zotero'
 
 type ProtocolExtensions = Record<string, ProtocolExtension>
 
+interface RegisterCustomProtocolOptions {
+  replace?: boolean
+}
+
 function getCustomProtocolExtensions(): ProtocolExtensions | undefined {
   try {
     const protocolHandler = Services.io.getProtocolHandler(ZOTERO_SCHEME) as any
@@ -15,7 +19,11 @@ function getCustomProtocolExtensions(): ProtocolExtensions | undefined {
   }
 }
 
-export function registerCustomProtocolPath(path: string, ext: ProtocolExtension): boolean {
+export function registerCustomProtocolPath(
+  path: string,
+  ext: ProtocolExtension,
+  options: RegisterCustomProtocolOptions = {},
+): boolean {
   const extensions = getCustomProtocolExtensions()
   const uri = `${ZOTERO_SCHEME}://${path}`
 
@@ -23,11 +31,11 @@ export function registerCustomProtocolPath(path: string, ext: ProtocolExtension)
     return false
 
   try {
-    if (extensions[uri] && extensions[uri] !== ext)
+    if (extensions[uri] && extensions[uri] !== ext && !options.replace)
       return false
 
     extensions[uri] = ext
-    return true
+    return extensions[uri] === ext
   }
   catch {
     return false

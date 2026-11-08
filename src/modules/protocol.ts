@@ -5,6 +5,11 @@ import { registerCustomProtocolPath, unregisterCustomProtocolPath } from '../uti
 import { decryptToken } from '../utils/sso'
 import { forceSetNutstoreWebdavPerfs, updateNutstoreSSOPerfs } from './nutstore-sso'
 
+const SSO_CALLBACK_PATHS = [
+  'nutstore-sync',
+  'nutstore-sync/sso',
+] as const
+
 class SSOProtocol implements ProtocolExtension {
   noContent = true
   doAction(uri: nsIURI) {
@@ -21,17 +26,22 @@ class SSOProtocol implements ProtocolExtension {
 }
 
 let registeredSSOProtocol: SSOProtocol | undefined
+let registeredSSOCallbackPaths: string[] = []
 
 export function registerNutstoreSSOProtocol() {
   if (registeredSSOProtocol)
     return
 
   const protocol = new SSOProtocol()
-  if (registerCustomProtocolPath('nutstore-sync', protocol)) {
+  registeredSSOCallbackPaths = SSO_CALLBACK_PATHS.filter(path =>
+    registerCustomProtocolPath(path, protocol, { replace: true }),
+  )
+
+  if (registeredSSOCallbackPaths.length) {
     registeredSSOProtocol = protocol
   }
   else {
-    ztoolkit.log('[Nutstore SSO] unable to register zotero://nutstore-sync protocol handler')
+    ztoolkit.log('[Nutstore SSO] unable to register Nutstore protocol handlers')
   }
 }
 
@@ -39,7 +49,10 @@ export function unregisterNutstoreSSOProtocol() {
   if (!registeredSSOProtocol)
     return
 
-  unregisterCustomProtocolPath('nutstore-sync', registeredSSOProtocol)
+  for (const path of registeredSSOCallbackPaths)
+    unregisterCustomProtocolPath(path, registeredSSOProtocol)
+
+  registeredSSOCallbackPaths = []
   registeredSSOProtocol = undefined
 }
 
